@@ -1,0 +1,145 @@
+/**
+ * Portfolio Data - Phan Hùng Thịnh
+ * Centralized content file. Update info here, components pull automatically.
+ */
+
+export const personalInfo = {
+  name: 'Phan Hùng Thịnh',
+  title: 'Thực tập sinh Business Analyst',
+  phone: '0XXX XXX XXX',
+  email: 'thinh.phan@email.com',
+  address: 'Quận 12, TP. Hồ Chí Minh',
+  quote: '"Turning business complexity into structured clarity - one process at a time."',
+  summary:
+    'Sinh viên năm cuối ngành Hệ thống Thông tin Quản lý tại Đại học GTVT TP.HCM (UTH), đam mê phân tích nghiệp vụ và tối ưu hoá quy trình doanh nghiệp. Có kinh nghiệm thực tế trong việc khảo sát yêu cầu, mô hình hoá quy trình (BPMN), phân tích GAP, và viết tài liệu SRS. Luôn tìm kiếm cơ hội để áp dụng tư duy hệ thống vào giải quyết vấn đề thực tiễn.',
+  goals: {
+    shortTerm:
+      'Trở thành Business Analyst chính thức tại một công ty công nghệ, tích luỹ kinh nghiệm thực tế trong các dự án chuyển đổi số.',
+    longTerm:
+      'Phát triển thành Senior BA / Product Owner, dẫn dắt các dự án phức tạp và đóng góp vào chiến lược số hoá doanh nghiệp.',
+  },
+  interests: [
+    'Đọc sách về Business Analysis & Product Management',
+    'Phân tích dữ liệu và trực quan hoá với Power BI',
+    'Tìm hiểu về Design Thinking & Lean Startup',
+    'Viết blog chia sẻ kiến thức BA',
+  ],
+  links: {
+    linkedin: '#',
+    github: '#',
+    cvPdf: 'https://drive.google.com/file/d/1eRIkaF3HNpZjzcDtnYL8S0-NdkR9t-tI/view?usp=sharing',
+    drive: '#',
+  },
+}
+
+export const projects = [
+  {
+    id: 1,
+    name: 'Phân tích & Tối ưu Quy trình Nghiệp vụ',
+    period: '09/2024 - 12/2024',
+    context:
+      'Doanh nghiệp gặp khó khăn trong việc quản lý quy trình xử lý đơn hàng, gây ra nhiều bước thừa và thời gian xử lý kéo dài. Cần phân tích hiện trạng và đề xuất cải tiến.',
+    role: 'Business Analyst - làm việc nhóm 4 người, đảm nhiệm phần khảo sát hiện trạng và vẽ sơ đồ BPMN.',
+    description:
+      'Khảo sát quy trình hiện tại (AS-IS), phân tích điểm nghẽn, đề xuất quy trình cải tiến (TO-BE) bằng BPMN 2.0. Xây dựng báo cáo phân tích chi tiết và trình bày cho stakeholders.',
+    tools: ['BPMN 2.0', 'Draw.io', 'Microsoft Visio', 'Excel', 'PowerPoint'],
+    results:
+      'Đề xuất quy trình TO-BE giúp giảm 30% thời gian xử lý đơn hàng, loại bỏ 3 bước thừa trong quy trình.',
+    lessons:
+      'Học được cách đặt câu hỏi đúng khi khảo sát stakeholders, và tầm quan trọng của việc validate quy trình với người dùng cuối.',
+    images: [],
+    links: { drive: '#', figma: '#' },
+  },
+  {
+    id: 2,
+    name: 'Phân tích GAP & Viết SRS cho Hệ thống ERP',
+    period: '01/2025 - 04/2025',
+    context:
+      'Công ty đang triển khai hệ thống ERP mới, cần phân tích khoảng cách giữa quy trình hiện tại và tính năng hệ thống, đồng thời xây dựng tài liệu đặc tả yêu cầu.',
+    role: 'Business Analyst - làm việc nhóm 3 người, đảm nhiệm phân tích GAP và viết tài liệu SRS cho module quản lý kho.',
+    description:
+      'Thực hiện phân tích GAP giữa quy trình AS-IS và tính năng hệ thống ERP. Viết tài liệu SRS theo chuẩn IEEE 830 cho module quản lý kho, bao gồm use case, business rules, và data dictionary.',
+    tools: ['GAP Analysis', 'IEEE 830 SRS', 'Word', 'Excel', 'Draw.io', 'SQL'],
+    results:
+      'Hoàn thành tài liệu SRS 45 trang cho module quản lý kho, xác định được 12 GAP items và đề xuất giải pháp cho từng item.',
+    lessons:
+      'Hiểu sâu hơn về cách cấu trúc tài liệu SRS chuyên nghiệp và tầm quan trọng của traceability matrix.',
+    images: [],
+    links: { drive: '#' },
+  },
+  {
+    id: 3,
+    name: 'La Pâtisserie - Website Đặt Bánh Online',
+    period: '03/2025 - 06/2025',
+    context:
+      'Tiệm bánh La Pâtisserie muốn xây dựng kênh bán hàng online, cần phân tích yêu cầu và thiết kế hệ thống đặt bánh trực tuyến.',
+    role: 'Business Analyst kiêm System Analyst - làm việc nhóm 5 người, đảm nhiệm phân tích yêu cầu, vẽ UML diagrams, và phối hợp với team dev.',
+    description:
+      'Thu thập yêu cầu từ chủ tiệm, xây dựng Use Case Diagram, Activity Diagram, Sequence Diagram cho các chức năng chính. Viết user stories và acceptance criteria. Phối hợp với team frontend/backend để đảm bảo tính nhất quán giữa yêu cầu và sản phẩm.',
+    tools: [
+      'UML',
+      'Use Case Diagram',
+      'Activity Diagram',
+      'Sequence Diagram',
+      'Figma',
+      'Draw.io',
+      'Jira',
+      'HTML/CSS',
+    ],
+    results:
+      'Hoàn thành phân tích yêu cầu và thiết kế cho 8 use cases chính. Website được deploy thành công với đầy đủ chức năng đặt bánh online.',
+    lessons:
+      'Kinh nghiệm làm việc trực tiếp với team dev, hiểu rõ hơn về Agile workflow và cách viết user stories hiệu quả.',
+    images: [],
+    links: { drive: '#', figma: '#', demo: '#' },
+  },
+]
+
+export const skills = {
+  baSkills: [
+    { name: 'Requirements Elicitation', desc: 'Phỏng vấn, khảo sát, workshop' },
+    { name: 'Process Modeling', desc: 'BPMN 2.0, AS-IS / TO-BE' },
+    { name: 'UML Diagrams', desc: 'Use Case, Activity, Sequence' },
+    { name: 'GAP Analysis', desc: 'Phân tích khoảng cách hệ thống' },
+    { name: 'Documentation', desc: 'SRS (IEEE 830), BRD, User Stories' },
+    { name: 'Data Analysis', desc: 'SQL queries, Data Dictionary' },
+  ],
+  tools: [
+    { name: 'Draw.io', category: 'Modeling' },
+    { name: 'Microsoft Visio', category: 'Modeling' },
+    { name: 'Figma', category: 'Design' },
+    { name: 'Jira', category: 'Project Mgmt' },
+    { name: 'SQL', category: 'Data' },
+    { name: 'Excel / Google Sheets', category: 'Data' },
+    { name: 'Power BI', category: 'Analytics' },
+    { name: 'Word / Google Docs', category: 'Documentation' },
+    { name: 'PowerPoint', category: 'Presentation' },
+    { name: 'HTML / CSS', category: 'Web' },
+  ],
+}
+
+export const education = {
+  school: 'Đại học Giao thông Vận tải TP.HCM (UTH)',
+  major: 'Hệ thống Thông tin Quản lý',
+  degree: 'Cử nhân',
+  gpa: '3.37 / 4.0',
+  period: '2021 - 2025',
+}
+
+export const certifications = [
+  {
+    name: 'Google Data Analytics Professional Certificate',
+    issuer: 'Google - Coursera',
+    date: '2024',
+  },
+  {
+    name: 'Agile & Scrum Fundamentals',
+    issuer: 'Coursera',
+    date: '2024',
+  },
+]
+
+export const languages = [
+  { name: 'Tiếng Việt', level: 'Bản ngữ' },
+  { name: 'Tiếng Anh', level: 'B2 - Giao tiếp tốt, đọc hiểu tài liệu chuyên ngành' },
+]
