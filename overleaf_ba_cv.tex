@@ -1,107 +1,208 @@
-\documentclass[10pt,a4paper]{article}
+%% ============================================
+%% CV - PHAN HUNG THINH - Business Analyst
+%% Compiler: pdfLaTeX on Overleaf
+%% ============================================
+\documentclass[a4paper,10pt]{article}
 
 \usepackage[utf8]{vietnam}
 \usepackage[T5]{fontenc}
-\usepackage[margin=1.35cm]{geometry}
+\usepackage[margin=0cm]{geometry}
 \usepackage{xcolor}
 \usepackage{enumitem}
-\usepackage{titlesec}
-\usepackage{tabularx}
-\usepackage[hidelinks]{hyperref}
-\usepackage{array}
-\usepackage{helvet}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{ifthen}
+\usepackage{tgheros}
 
 \renewcommand{\familydefault}{\sfdefault}
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{2pt}
-\setlist[itemize]{leftmargin=*, itemsep=2pt, topsep=2pt}
+\setlength{\parskip}{0pt}
+\setlength{\TPHorizModule}{1cm}
+\setlength{\TPVertModule}{1cm}
+\setlist[itemize]{leftmargin=1em,itemsep=1pt,parsep=0pt,topsep=2pt}
 
+%% --- Colors ---
+\definecolor{sidebar}{HTML}{16201C}
+\definecolor{sidelight}{HTML}{24312B}
 \definecolor{accent}{HTML}{C84A2F}
-\definecolor{text}{HTML}{16201C}
-\definecolor{muted}{HTML}{5F6B66}
+\definecolor{textlight}{HTML}{EEF1EE}
+\definecolor{textweak}{HTML}{AAB5AF}
+\definecolor{darktext}{HTML}{16201C}
+\definecolor{midgray}{HTML}{66726C}
+\definecolor{lightgray}{HTML}{EEF1EE}
 
-\titleformat{\section}
-  {\large\bfseries\color{text}}
-  {}
-  {0pt}
-  {}
-  [\vspace{-4pt}\color{accent}\titlerule]
+\hypersetup{
+  colorlinks=true,
+  urlcolor=accent,
+  linkcolor=accent
+}
 
-\newcommand{\cvsection}[1]{\section*{#1}}
-\newcommand{\role}[2]{\textbf{#1}\hfill{\color{muted}#2}}
-\newcommand{\link}[2]{\href{#1}{\color{accent}#2}}
+%% --- Helpers ---
+\newcommand{\sidehead}[1]{%
+  \vspace{7pt}{\color{accent}\rule{1.55cm}{2.2pt}}\\[3pt]%
+  {\color{white}\small\bfseries\MakeUppercase{#1}}\\[4pt]%
+}
+
+\newcommand{\contactrow}[2]{%
+  {\scriptsize\color{accent}\bfseries #1}\\[-1pt]%
+  {\footnotesize\color{textlight}#2}\\[4pt]%
+}
+
+\newcommand{\skillbar}[2]{%
+  {\footnotesize\color{textlight}#1}\hfill{\scriptsize\color{textweak}#2\%}\\[2pt]%
+  \begin{tikzpicture}
+    \fill[sidelight] (0,0) rectangle (5.2,0.14);
+    \fill[accent] (0,0) rectangle ({5.2*#2/100},0.14);
+  \end{tikzpicture}\\[4pt]%
+}
+
+\newcommand{\tooltag}[1]{%
+  \tikz[baseline=(t.base)]{\node[fill=sidelight,text=textlight,inner sep=2.5pt,font=\scriptsize](t){#1};}\,%
+}
+
+\newcommand{\mainhead}[1]{%
+  \vspace{7pt}{\color{darktext}\normalsize\bfseries\MakeUppercase{#1}}\\[-3pt]%
+  {\color{accent}\rule{\linewidth}{1.45pt}}\\[4pt]%
+}
+
+\newcommand{\mtag}[1]{%
+  \tikz[baseline=(t.base)]{\node[fill=lightgray,text=darktext,inner sep=2.4pt,font=\scriptsize](t){#1};}\,%
+}
+
+\newcommand{\plink}[2]{\href{#1}{\color{accent}#2}}
 
 \begin{document}
 
-{\Huge\bfseries Phan Hùng Thịnh}\\[-1pt]
-{\large\color{accent}\bfseries Thực tập sinh Business Analyst}\\[5pt]
-\begin{tabularx}{\textwidth}{@{}X r@{}}
-Quận 12, TP. Hồ Chí Minh & 0965050142 \\
-\href{mailto:thinh.phan@email.com}{thinh.phan@email.com} &
-\link{https://kh-thinh-portfolio.vercel.app}{Portfolio: kh-thinh-portfolio.vercel.app} \\
-\link{https://github.com/hunggthinhh}{GitHub: github.com/hunggthinhh} &
-\link{https://drive.google.com/file/d/1eRIkaF3HNpZjzcDtnYL8S0-NdkR9t-tI/view?usp=sharing}{CV Online}
-\end{tabularx}
+%% Sidebar background
+\begin{textblock*}{7.2cm}(0cm,0cm)
+  \noindent\colorbox{sidebar}{\rule{0pt}{29.7cm}\hspace{7.2cm}}
+\end{textblock*}
 
-\vspace{4pt}
+%% Accent stripe
+\begin{textblock*}{7.2cm}(0cm,0cm)
+  \noindent\colorbox{accent}{\rule{0pt}{4pt}\hspace{7.2cm}}
+\end{textblock*}
 
-\cvsection{Tóm tắt}
-Sinh viên năm cuối ngành Hệ thống Thông tin Quản lý tại Đại học GTVT TP.HCM (UTH), định hướng Business Analyst. Có kinh nghiệm khảo sát yêu cầu, mô hình hoá quy trình BPMN, phân tích GAP, viết tài liệu SRS, xây dựng UML diagrams và phối hợp nhóm trong các dự án phân tích hệ thống. Quan tâm đến tối ưu quy trình doanh nghiệp và chuyển đổi số.
+%% ==========================================
+%% SIDEBAR
+%% ==========================================
+\begin{textblock*}{5.65cm}(0.78cm,0.58cm)
+\color{white}\raggedright
 
-\cvsection{Kỹ năng}
-\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3.2cm} X@{}}
-Business Analysis & Requirements Elicitation, Stakeholder Analysis, User Stories, Acceptance Criteria, GAP Analysis, SRS/BRD \\
-Modeling & BPMN 2.0, Use Case Diagram, Activity Diagram, Sequence Diagram, RASCI Matrix, Power/Interest Grid \\
-Data \& Tools & SQL, Excel/Google Sheets, Power BI, Draw.io, Visio, Figma, Jira, Word/Google Docs, PowerPoint \\
-Soft Skills & Tư duy hệ thống, giao tiếp, phân tích vấn đề, làm việc nhóm, trình bày tài liệu
-\end{tabularx}
+\begin{center}
+  \begin{tikzpicture}
+    \fill[sidelight] (0,0) circle (1.55cm);
+    \fill[accent] (0,0) circle (1.47cm);
+    \begin{scope}
+      \clip (0,0) circle (1.36cm);
+      \IfFileExists{image/avatar.png}
+        {\node at (0,0) {\includegraphics[width=2.75cm]{image/avatar.png}};}
+        {\fill[sidebar] (-1.36,-1.36) rectangle (1.36,1.36);
+         \node[text=white,font=\bfseries\Large] at (0,0) {PHT};}
+    \end{scope}
+  \end{tikzpicture}\\[3pt]
+  {\scriptsize\color{textweak}\MakeUppercase{Business Analyst Intern}}\\[1pt]
+  {\color{accent}\rule{2cm}{2pt}}
+\end{center}
 
-\cvsection{Dự án tiêu biểu}
+\sidehead{Liên hệ}
+\contactrow{ĐIỆN THOẠI}{0965050142}
+\contactrow{EMAIL}{\href{mailto:thinh.phan@email.com}{thinh.phan@email.com}}
+\contactrow{ĐỊA CHỈ}{Quận 12, TP. Hồ Chí Minh}
+\contactrow{PORTFOLIO}{\href{https://kh-thinh-portfolio.vercel.app}{kh-thinh-portfolio.vercel.app}}
+\contactrow{GITHUB}{\href{https://github.com/hunggthinhh}{github.com/hunggthinhh}}
+\contactrow{CV ONLINE}{\href{https://drive.google.com/file/d/1eRIkaF3HNpZjzcDtnYL8S0-NdkR9t-tI/view?usp=sharing}{Google Drive CV}}
 
-\role{Phân tích nghiệp vụ quy trình vận hành bán hàng trên Shopee}{09/2024 -- 12/2024}
+\sidehead{Kỹ năng BA}
+\skillbar{Requirements Elicitation}{85}
+\skillbar{Process Modeling / BPMN}{90}
+\skillbar{UML Diagrams}{85}
+\skillbar{GAP Analysis}{80}
+\skillbar{SRS Documentation}{85}
+\skillbar{User Stories / AC}{80}
+
+\sidehead{Công cụ}
+\tooltag{Draw.io} \tooltag{Visio} \tooltag{Figma}\\[3pt]
+\tooltag{Jira} \tooltag{SQL} \tooltag{Power BI}\\[3pt]
+\tooltag{Excel} \tooltag{Word} \tooltag{PowerPoint}
+
+\sidehead{Chứng chỉ}
+{\footnotesize\bfseries Microsoft Office Specialist}\\[-1pt]
+{\scriptsize\color{textweak}\href{https://drive.google.com/file/d/19YHQMBJcSWC0WykoXC2h37FjZIOEMbKy/view?usp=sharing}{Microsoft, 2025}}\\[5pt]
+{\footnotesize\bfseries Google Cloud Computing}\\[-1pt]
+{\scriptsize\color{textweak}\href{https://www.credly.com/badges/aa2988ac-c2ae-463f-a11c-4dadc8ed7764/facebook?fbclid=IwY2xjawTFmnpleHRuA2FlbQIxMQBzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEeZcb7swZnaxGZ17nb1KW2MhzzB1sOfRj2faR9Ebqbay1FSVw7SAEcJtbwpGs_aem_YXd10lnpqIzwoMFC8f1BFA}{Google Cloud / Credly, 2025}}
+
+\sidehead{Ngôn ngữ}
+{\footnotesize\bfseries Tiếng Việt}\\[-1pt]
+{\scriptsize\color{textweak}Bản ngữ}\\[4pt]
+{\footnotesize\bfseries Tiếng Anh -- B2}\\[-1pt]
+{\scriptsize\color{textweak}Giao tiếp tốt, đọc hiểu tài liệu chuyên ngành}
+
+\end{textblock*}
+
+%% ==========================================
+%% MAIN CONTENT
+%% ==========================================
+\begin{textblock*}{12.55cm}(7.85cm,0.62cm)
+\raggedright\color{darktext}
+
+{\fontsize{25pt}{29pt}\selectfont\bfseries PHAN HÙNG THỊNH}\\[4pt]
+{\large\color{accent}\bfseries THỰC TẬP SINH BUSINESS ANALYST}\\[5pt]
+{\color{accent}\rule{\linewidth}{2.4pt}}
+
+\mainhead{Tóm tắt}
+{\small Sinh viên năm cuối ngành Hệ thống Thông tin Quản lý tại Đại học GTVT TP.HCM (UTH), định hướng Business Analyst. Có kinh nghiệm khảo sát yêu cầu, mô hình hoá quy trình BPMN, phân tích GAP, viết tài liệu SRS, xây dựng UML diagrams và phối hợp nhóm trong các dự án phân tích hệ thống. Quan tâm đến tối ưu quy trình doanh nghiệp và chuyển đổi số.}
+
+\mainhead{Dự án tiêu biểu}
+
+{\small\bfseries Phân tích nghiệp vụ quy trình vận hành bán hàng trên Shopee}
+\hfill{\scriptsize\color{midgray}09/2024 -- 12/2024}\\[-1pt]
+{\scriptsize\color{accent}\bfseries Business Analyst -- phân tích quy trình, BPMN, RASCI}
 \begin{itemize}
-  \item Khảo sát quy trình AS-IS, phân tích điểm nghẽn và đề xuất quy trình TO-BE bằng BPMN 2.0.
-  \item Xây dựng Power/Interest Grid, RASCI Matrix, BPMN, Activity Diagram và Sequence Diagram cho các luồng nghiệp vụ chính.
-  \item Đề xuất cải tiến giúp giảm thời gian xử lý đơn hàng và loại bỏ các bước thừa trong quy trình.
-  \item Tài liệu: \link{https://docs.google.com/document/d/1WNMDAvptXeaWxipY-k5PPOL_7cVS6b8R/edit?usp=sharing&ouid=105379329389586303385&rtpof=true&sd=true}{Google Docs}
+  \item[\color{accent}\textbullet]{\scriptsize Khảo sát quy trình AS-IS, phân tích điểm nghẽn và đề xuất quy trình TO-BE bằng BPMN 2.0.}
+  \item[\color{accent}\textbullet]{\scriptsize Xây dựng Power/Interest Grid, RASCI Matrix, Activity Diagram và Sequence Diagram cho các luồng nghiệp vụ chính.}
+  \item[\color{accent}\textbullet]{\scriptsize Tài liệu dự án: \plink{https://docs.google.com/document/d/1WNMDAvptXeaWxipY-k5PPOL_7cVS6b8R/edit?usp=sharing&ouid=105379329389586303385&rtpof=true&sd=true}{Google Docs}}
 \end{itemize}
+{\scriptsize \mtag{BPMN 2.0} \mtag{RASCI} \mtag{Draw.io} \mtag{Visio} \mtag{Excel}}
+\vspace{5pt}
 
-\role{Phân tích nghiệp vụ bán lẻ và ứng dụng Odoo}{01/2025 -- 04/2025}
+{\small\bfseries Phân tích nghiệp vụ bán lẻ và ứng dụng Odoo}
+\hfill{\scriptsize\color{midgray}01/2025 -- 04/2025}\\[-1pt]
+{\scriptsize\color{accent}\bfseries Business Analyst -- GAP Analysis, SRS, ERP/Odoo}
 \begin{itemize}
-  \item Phân tích GAP giữa quy trình hiện tại và hệ thống ERP/Odoo, xác định vấn đề nghiệp vụ và đề xuất hướng xử lý.
-  \item Viết tài liệu SRS cho module quản lý kho, bao gồm use case, business rules và data dictionary.
-  \item Thiết kế Rich Picture, sơ đồ tổ chức, Use Case và Sequence Diagram cho các chức năng chính.
-  \item Tài liệu: \link{https://docs.google.com/document/d/1EErEOzBvqhhrRptvYHMm_D-_20e2K6s3/edit?usp=sharing&ouid=105379329389586303385&rtpof=true&sd=true}{Google Docs}
-  \item GitHub: \link{https://github.com/hunggthinhh/HTTTQL}{github.com/hunggthinhh/HTTTQL}
+  \item[\color{accent}\textbullet]{\scriptsize Phân tích GAP giữa quy trình hiện tại và hệ thống ERP/Odoo, xác định vấn đề nghiệp vụ và đề xuất hướng xử lý.}
+  \item[\color{accent}\textbullet]{\scriptsize Viết tài liệu SRS cho module quản lý kho, gồm use case, business rules và data dictionary.}
+  \item[\color{accent}\textbullet]{\scriptsize Tài liệu: \plink{https://docs.google.com/document/d/1EErEOzBvqhhrRptvYHMm_D-_20e2K6s3/edit?usp=sharing&ouid=105379329389586303385&rtpof=true&sd=true}{Google Docs} \quad GitHub: \plink{https://github.com/hunggthinhh/HTTTQL}{HTTTQL}}
 \end{itemize}
+{\scriptsize \mtag{GAP Analysis} \mtag{SRS} \mtag{IEEE 830} \mtag{SQL} \mtag{Draw.io}}
+\vspace{5pt}
 
-\role{La Pâtisserie -- Website đặt bánh online}{03/2025 -- 06/2025}
+{\small\bfseries La Pâtisserie -- Website đặt bánh online}
+\hfill{\scriptsize\color{midgray}03/2025 -- 06/2025}\\[-1pt]
+{\scriptsize\color{accent}\bfseries BA kiêm System Analyst -- UML, user stories, phối hợp team dev}
 \begin{itemize}
-  \item Thu thập yêu cầu từ chủ tiệm, phân tích chức năng đặt bánh online và viết user stories/acceptance criteria.
-  \item Thiết kế Use Case Diagram, Activity Diagram và Sequence Diagram cho đăng ký, đăng nhập, quên mật khẩu, tìm kiếm sản phẩm.
-  \item Phối hợp với nhóm phát triển để đảm bảo tính nhất quán giữa yêu cầu nghiệp vụ và sản phẩm triển khai.
-  \item Tài liệu: \link{https://docs.google.com/document/d/1iz-W5ofKHLroMQEQA46hOROq7BZu4A-W/edit?usp=sharing&ouid=105379329389586303385&rtpof=true&sd=true}{Google Docs}
-  \item GitHub: \link{https://github.com/hunggthinhh/Web_banhang}{github.com/hunggthinhh/Web\_banhang}
+  \item[\color{accent}\textbullet]{\scriptsize Thu thập yêu cầu, phân tích chức năng đặt bánh online và viết user stories/acceptance criteria.}
+  \item[\color{accent}\textbullet]{\scriptsize Thiết kế Use Case, Activity và Sequence Diagram cho đăng ký, đăng nhập, quên mật khẩu, tìm kiếm sản phẩm.}
+  \item[\color{accent}\textbullet]{\scriptsize Tài liệu: \plink{https://docs.google.com/document/d/1iz-W5ofKHLroMQEQA46hOROq7BZu4A-W/edit?usp=sharing&ouid=105379329389586303385&rtpof=true&sd=true}{Google Docs} \quad GitHub: \plink{https://github.com/hunggthinhh/Web_banhang}{Web\_banhang}}
 \end{itemize}
+{\scriptsize \mtag{UML} \mtag{Figma} \mtag{Draw.io} \mtag{Jira} \mtag{HTML/CSS}}
 
-\cvsection{Học vấn}
-\role{Đại học Giao thông Vận tải TP.HCM (UTH)}{2021 -- 2025}
-\begin{itemize}
-  \item Ngành: Hệ thống Thông tin Quản lý
-  \item GPA: 3.37 / 4.0
-\end{itemize}
+\mainhead{Học vấn}
+{\small\bfseries Đại học Giao thông Vận tải TP.HCM (UTH)}
+\hfill{\scriptsize\color{midgray}2021 -- 2025}\\[-1pt]
+{\scriptsize Cử nhân -- Hệ thống Thông tin Quản lý}
+\hfill{\small\color{accent}\bfseries GPA: 3.37 / 4.0}
 
-\cvsection{Chứng chỉ}
-\begin{itemize}
-  \item Microsoft Office Specialist -- Associate, 2025. \link{https://drive.google.com/file/d/19YHQMBJcSWC0WykoXC2h37FjZIOEMbKy/view?usp=sharing}{Xem chứng chỉ}
-  \item Google Cloud Computing Certificate, 2025. \link{https://www.credly.com/badges/aa2988ac-c2ae-463f-a11c-4dadc8ed7764/facebook?fbclid=IwY2xjawTFmnpleHRuA2FlbQIxMQBzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEeZcb7swZnaxGZ17nb1KW2MhzzB1sOfRj2faR9Ebqbay1FSVw7SAEcJtbwpGs_aem_YXd10lnpqIzwoMFC8f1BFA}{Credly}
-\end{itemize}
+\mainhead{Định hướng nghề nghiệp}
+{\scriptsize\color{accent}\bfseries Ngắn hạn:}
+{\scriptsize Trở thành Business Analyst chính thức tại công ty công nghệ, tích luỹ kinh nghiệm thực tế trong các dự án chuyển đổi số.}\\[3pt]
+{\scriptsize\color{accent}\bfseries Dài hạn:}
+{\scriptsize Phát triển thành Senior BA / Product Owner, dẫn dắt các dự án phức tạp và đóng góp vào chiến lược số hoá doanh nghiệp.}
 
-\cvsection{Ngôn ngữ}
-\begin{itemize}
-  \item Tiếng Việt: Bản ngữ
-  \item Tiếng Anh: B2 -- giao tiếp tốt, đọc hiểu tài liệu chuyên ngành
-\end{itemize}
+\end{textblock*}
 
+\null
 \end{document}
