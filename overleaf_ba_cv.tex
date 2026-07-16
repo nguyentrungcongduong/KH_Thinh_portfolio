@@ -1,13 +1,11 @@
 %% ============================================
 %% CV - PHAN HUNG THINH - Business Analyst
-%% Compiler: pdfLaTeX on Overleaf
+%% Compiler: XeLaTeX on Overleaf
 %% ============================================
 \documentclass[a4paper,10pt]{article}
 
-\usepackage[utf8]{vietnam}
-\usepackage[T5]{fontenc}
 \usepackage[margin=0cm]{geometry}
-\usepackage{lmodern}
+\usepackage{fontspec}
 \usepackage{microtype}
 \usepackage{xcolor}
 \usepackage{enumitem}
@@ -16,6 +14,17 @@
 \usepackage{graphicx}
 \usepackage[absolute,overlay]{textpos}
 \usepackage{ifthen}
+
+\defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\IfFontExistsTF{Open Sans}
+  {\setmainfont{Open Sans}}
+  {\setmainfont{TeX Gyre Heros}}
+\IfFontExistsTF{Montserrat}
+  {\newfontfamily\headingfont{Montserrat}}
+  {\newfontfamily\headingfont{TeX Gyre Heros}}
+\IfFontExistsTF{Roboto}
+  {\newfontfamily\detailfont{Roboto}}
+  {\newfontfamily\detailfont{TeX Gyre Heros}}
 
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
@@ -44,16 +53,16 @@
 %% --- Helpers ---
 \newcommand{\sidehead}[1]{%
   \vspace{7pt}{\color{accent}\rule{1.55cm}{2.2pt}}\\[3pt]%
-  {\color{white}\small\bfseries #1}\\[4pt]%
+  {\headingfont\color{white}\small\bfseries #1}\\[4pt]%
 }
 
 \newcommand{\contactrow}[2]{%
-  {\scriptsize\color{accent}\bfseries #1}\\[-1pt]%
-  {\footnotesize\color{textlight}#2}\\[4pt]%
+  {\detailfont\scriptsize\color{accent}\bfseries #1}\\[-1pt]%
+  {\detailfont\footnotesize\color{textlight}#2}\\[4pt]%
 }
 
 \newcommand{\skillbar}[2]{%
-  {\footnotesize\color{textlight}#1}\hfill{\scriptsize\color{textweak}#2\%}\\[2pt]%
+  {\detailfont\footnotesize\color{textlight}#1}\hfill{\detailfont\scriptsize\color{textweak}#2\%}\\[2pt]%
   \begin{tikzpicture}
     \fill[sidelight] (0,0) rectangle (5.2,0.14);
     \fill[accent] (0,0) rectangle ({5.2*#2/100},0.14);
@@ -61,16 +70,16 @@
 }
 
 \newcommand{\tooltag}[1]{%
-  \tikz[baseline=(t.base)]{\node[fill=sidelight,text=textlight,inner sep=2.4pt,font=\scriptsize](t){#1};}\,%
+  \tikz[baseline=(t.base)]{\node[fill=sidelight,text=textlight,inner sep=2.4pt,font=\detailfont\scriptsize](t){#1};}\,%
 }
 
 \newcommand{\mainhead}[1]{%
-  \vspace{7pt}{\color{darktext}\large\bfseries #1}\\[-3pt]%
+  \vspace{7pt}{\headingfont\color{darktext}\large\bfseries #1}\\[-3pt]%
   {\color{accent}\rule{\linewidth}{1.35pt}}\\[4pt]%
 }
 
 \newcommand{\mtag}[1]{%
-  \tikz[baseline=(t.base)]{\node[fill=lightgray,text=darktext,inner sep=2.4pt,font=\scriptsize](t){#1};}\,%
+  \tikz[baseline=(t.base)]{\node[fill=lightgray,text=darktext,inner sep=2.4pt,font=\detailfont\scriptsize](t){#1};}\,%
 }
 
 \newcommand{\plink}[2]{\href{#1}{\color{accent}#2}}
@@ -105,7 +114,7 @@
          \node[text=white,font=\bfseries\Large] at (0,0) {PHT};}
     \end{scope}
   \end{tikzpicture}\\[3pt]
-  {\scriptsize\color{textweak}Business Analyst Intern}\\[1pt]
+  {\detailfont\scriptsize\color{textweak}Business Analyst Intern}\\[1pt]
   {\color{accent}\rule{2cm}{2pt}}
 \end{center}
 
@@ -131,16 +140,16 @@
 \tooltag{Excel} \tooltag{Word} \tooltag{PowerPoint}
 
 \sidehead{Chứng chỉ}
-{\footnotesize\bfseries Microsoft Office Specialist}\\[-1pt]
-{\scriptsize\color{textweak}\href{https://drive.google.com/file/d/19YHQMBJcSWC0WykoXC2h37FjZIOEMbKy/view?usp=sharing}{Microsoft, 2025}}\\[5pt]
-{\footnotesize\bfseries Google Cloud Computing}\\[-1pt]
-{\scriptsize\color{textweak}\href{https://www.credly.com/badges/aa2988ac-c2ae-463f-a11c-4dadc8ed7764/facebook?fbclid=IwY2xjawTFmnpleHRuA2FlbQIxMQBzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEeZcb7swZnaxGZ17nb1KW2MhzzB1sOfRj2faR9Ebqbay1FSVw7SAEcJtbwpGs_aem_YXd10lnpqIzwoMFC8f1BFA}{Google Cloud / Credly, 2025}}
+{\detailfont\footnotesize\bfseries Microsoft Office Specialist}\\[-1pt]
+{\detailfont\scriptsize\color{textweak}\href{https://drive.google.com/file/d/19YHQMBJcSWC0WykoXC2h37FjZIOEMbKy/view?usp=sharing}{Microsoft, 2025}}\\[5pt]
+{\detailfont\footnotesize\bfseries Google Cloud Computing}\\[-1pt]
+{\detailfont\scriptsize\color{textweak}\href{https://www.credly.com/badges/aa2988ac-c2ae-463f-a11c-4dadc8ed7764/facebook?fbclid=IwY2xjawTFmnpleHRuA2FlbQIxMQBzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEeZcb7swZnaxGZ17nb1KW2MhzzB1sOfRj2faR9Ebqbay1FSVw7SAEcJtbwpGs_aem_YXd10lnpqIzwoMFC8f1BFA}{Google Cloud / Credly, 2025}}
 
 \sidehead{Ngôn ngữ}
-{\footnotesize\bfseries Tiếng Việt}\\[-1pt]
-{\scriptsize\color{textweak}Bản ngữ}\\[4pt]
-{\footnotesize\bfseries Tiếng Anh -- B2}\\[-1pt]
-{\scriptsize\color{textweak}Giao tiếp tốt, đọc hiểu tài liệu chuyên ngành}
+{\detailfont\footnotesize\bfseries Tiếng Việt}\\[-1pt]
+{\detailfont\scriptsize\color{textweak}Bản ngữ}\\[4pt]
+{\detailfont\footnotesize\bfseries Tiếng Anh -- B2}\\[-1pt]
+{\detailfont\scriptsize\color{textweak}Giao tiếp tốt, đọc hiểu tài liệu chuyên ngành}
 
 \end{textblock*}
 
@@ -150,8 +159,8 @@
 \begin{textblock*}{12.55cm}(7.85cm,0.62cm)
 \raggedright\color{darktext}
 
-{\fontsize{25pt}{29pt}\selectfont\bfseries Phan Hùng Thịnh}\\[3pt]
-{\large\color{accent}\bfseries Thực tập sinh Business Analyst}\\[5pt]
+{\headingfont\fontsize{25pt}{29pt}\selectfont\bfseries Phan Hùng Thịnh}\\[3pt]
+{\headingfont\large\color{accent}\bfseries Thực tập sinh Business Analyst}\\[5pt]
 {\color{accent}\rule{\linewidth}{2.2pt}}
 
 \mainhead{Tóm tắt}
@@ -159,43 +168,43 @@
 
 \mainhead{Dự án tiêu biểu}
 
-{\small\bfseries Phân tích nghiệp vụ quy trình vận hành bán hàng trên Shopee}
-\hfill{\scriptsize\color{midgray}09/2024 -- 12/2024}\\[-1pt]
-{\scriptsize\color{accent}\bfseries Business Analyst -- phân tích quy trình, BPMN, RASCI}
+{\headingfont\small\bfseries Phân tích nghiệp vụ quy trình vận hành bán hàng trên Shopee}
+\hfill{\detailfont\scriptsize\color{midgray}09/2024 -- 12/2024}\\[-1pt]
+{\detailfont\scriptsize\color{accent}\bfseries Business Analyst -- phân tích quy trình, BPMN, RASCI}
 \begin{itemize}
   \item[\color{accent}\textbullet]{\scriptsize Khảo sát quy trình AS-IS, phân tích điểm nghẽn và đề xuất quy trình TO-BE bằng BPMN 2.0.}
   \item[\color{accent}\textbullet]{\scriptsize Xây dựng Power/Interest Grid, RASCI Matrix, Activity Diagram và Sequence Diagram cho các luồng nghiệp vụ chính.}
   \item[\color{accent}\textbullet]{\scriptsize Tài liệu dự án: \plink{https://docs.google.com/document/d/1WNMDAvptXeaWxipY-k5PPOL_7cVS6b8R/edit?usp=sharing&ouid=105379329389586303385&rtpof=true&sd=true}{Google Docs}}
 \end{itemize}
-{\scriptsize \mtag{BPMN 2.0} \mtag{RASCI} \mtag{Draw.io} \mtag{Visio} \mtag{Excel}}
+{\detailfont\scriptsize \mtag{BPMN 2.0} \mtag{RASCI} \mtag{Draw.io} \mtag{Visio} \mtag{Excel}}
 \vspace{5pt}
 
-{\small\bfseries Phân tích nghiệp vụ bán lẻ và ứng dụng Odoo}
-\hfill{\scriptsize\color{midgray}01/2025 -- 04/2025}\\[-1pt]
-{\scriptsize\color{accent}\bfseries Business Analyst -- GAP Analysis, SRS, ERP/Odoo}
+{\headingfont\small\bfseries Phân tích nghiệp vụ bán lẻ và ứng dụng Odoo}
+\hfill{\detailfont\scriptsize\color{midgray}01/2025 -- 04/2025}\\[-1pt]
+{\detailfont\scriptsize\color{accent}\bfseries Business Analyst -- GAP Analysis, SRS, ERP/Odoo}
 \begin{itemize}
   \item[\color{accent}\textbullet]{\scriptsize Phân tích GAP giữa quy trình hiện tại và hệ thống ERP/Odoo, xác định vấn đề nghiệp vụ và đề xuất hướng xử lý.}
   \item[\color{accent}\textbullet]{\scriptsize Viết tài liệu SRS cho module quản lý kho, gồm use case, business rules và data dictionary.}
   \item[\color{accent}\textbullet]{\scriptsize Tài liệu: \plink{https://docs.google.com/document/d/1EErEOzBvqhhrRptvYHMm_D-_20e2K6s3/edit?usp=sharing&ouid=105379329389586303385&rtpof=true&sd=true}{Google Docs} \quad GitHub: \plink{https://github.com/hunggthinhh/HTTTQL}{HTTTQL}}
 \end{itemize}
-{\scriptsize \mtag{GAP Analysis} \mtag{SRS} \mtag{IEEE 830} \mtag{SQL} \mtag{Draw.io}}
+{\detailfont\scriptsize \mtag{GAP Analysis} \mtag{SRS} \mtag{IEEE 830} \mtag{SQL} \mtag{Draw.io}}
 \vspace{5pt}
 
-{\small\bfseries La Pâtisserie -- Website đặt bánh online}
-\hfill{\scriptsize\color{midgray}03/2025 -- 06/2025}\\[-1pt]
-{\scriptsize\color{accent}\bfseries BA kiêm System Analyst -- UML, user stories, phối hợp team dev}
+{\headingfont\small\bfseries La Pâtisserie -- Website đặt bánh online}
+\hfill{\detailfont\scriptsize\color{midgray}03/2025 -- 06/2025}\\[-1pt]
+{\detailfont\scriptsize\color{accent}\bfseries BA kiêm System Analyst -- UML, user stories, phối hợp team dev}
 \begin{itemize}
   \item[\color{accent}\textbullet]{\scriptsize Thu thập yêu cầu, phân tích chức năng đặt bánh online và viết user stories/acceptance criteria.}
   \item[\color{accent}\textbullet]{\scriptsize Thiết kế Use Case, Activity và Sequence Diagram cho đăng ký, đăng nhập, quên mật khẩu, tìm kiếm sản phẩm.}
   \item[\color{accent}\textbullet]{\scriptsize Tài liệu: \plink{https://docs.google.com/document/d/1iz-W5ofKHLroMQEQA46hOROq7BZu4A-W/edit?usp=sharing&ouid=105379329389586303385&rtpof=true&sd=true}{Google Docs} \quad GitHub: \plink{https://github.com/hunggthinhh/Web_banhang}{Web\_banhang}}
 \end{itemize}
-{\scriptsize \mtag{UML} \mtag{Figma} \mtag{Draw.io} \mtag{Jira} \mtag{HTML/CSS}}
+{\detailfont\scriptsize \mtag{UML} \mtag{Figma} \mtag{Draw.io} \mtag{Jira} \mtag{HTML/CSS}}
 
 \mainhead{Học vấn}
-{\small\bfseries Đại học Giao thông Vận tải TP.HCM (UTH)}
-\hfill{\scriptsize\color{midgray}2021 -- 2025}\\[-1pt]
-{\scriptsize Cử nhân -- Hệ thống Thông tin Quản lý}
-\hfill{\small\color{accent}\bfseries GPA: 3.37 / 4.0}
+{\headingfont\small\bfseries Đại học Giao thông Vận tải TP.HCM (UTH)}
+\hfill{\detailfont\scriptsize\color{midgray}2021 -- 2025}\\[-1pt]
+{\detailfont\scriptsize Cử nhân -- Hệ thống Thông tin Quản lý}
+\hfill{\headingfont\small\color{accent}\bfseries GPA: 3.37 / 4.0}
 
 \mainhead{Định hướng nghề nghiệp}
 {\scriptsize\color{accent}\bfseries Ngắn hạn:}
