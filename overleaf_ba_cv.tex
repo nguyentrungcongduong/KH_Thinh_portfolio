@@ -1,0 +1,105 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[utf8]{vietnam}
+\usepackage[T5]{fontenc}
+\usepackage[margin=1.35cm]{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{array}
+\usepackage{helvet}
+
+\renewcommand{\familydefault}{\sfdefault}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+\setlist[itemize]{leftmargin=*, itemsep=2pt, topsep=2pt}
+
+\definecolor{accent}{HTML}{C84A2F}
+\definecolor{text}{HTML}{16201C}
+\definecolor{muted}{HTML}{5F6B66}
+
+\titleformat{\section}
+  {\large\bfseries\color{text}}
+  {}
+  {0pt}
+  {}
+  [\vspace{-4pt}\color{accent}\titlerule]
+
+\newcommand{\cvsection}[1]{\section*{#1}}
+\newcommand{\role}[2]{\textbf{#1}\hfill{\color{muted}#2}}
+\newcommand{\link}[2]{\href{#1}{\color{accent}#2}}
+
+\begin{document}
+
+{\Huge\bfseries Phan Hùng Thịnh}\\[-1pt]
+{\large\color{accent}\bfseries Thực tập sinh Business Analyst}\\[5pt]
+\begin{tabularx}{\textwidth}{@{}X r@{}}
+Quận 12, TP. Hồ Chí Minh & 0965050142 \\
+\href{mailto:thinh.phan@email.com}{thinh.phan@email.com} &
+\link{https://kh-thinh-portfolio.vercel.app}{Portfolio}
+\end{tabularx}
+
+\vspace{4pt}
+
+\cvsection{Tóm tắt}
+Sinh viên năm cuối ngành Hệ thống Thông tin Quản lý tại Đại học GTVT TP.HCM (UTH), định hướng Business Analyst. Có kinh nghiệm khảo sát yêu cầu, mô hình hoá quy trình BPMN, phân tích GAP, viết tài liệu SRS, xây dựng UML diagrams và phối hợp nhóm trong các dự án phân tích hệ thống. Quan tâm đến tối ưu quy trình doanh nghiệp và chuyển đổi số.
+
+\cvsection{Kỹ năng}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3.2cm} X@{}}
+Business Analysis & Requirements Elicitation, Stakeholder Analysis, User Stories, Acceptance Criteria, GAP Analysis, SRS/BRD \\
+Modeling & BPMN 2.0, Use Case Diagram, Activity Diagram, Sequence Diagram, RASCI Matrix, Power/Interest Grid \\
+Data \& Tools & SQL, Excel/Google Sheets, Power BI, Draw.io, Visio, Figma, Jira, Word/Google Docs, PowerPoint \\
+Soft Skills & Tư duy hệ thống, giao tiếp, phân tích vấn đề, làm việc nhóm, trình bày tài liệu
+\end{tabularx}
+
+\cvsection{Dự án tiêu biểu}
+
+\role{Phân tích nghiệp vụ quy trình vận hành bán hàng trên Shopee}{09/2024 -- 12/2024}
+\begin{itemize}
+  \item Khảo sát quy trình AS-IS, phân tích điểm nghẽn và đề xuất quy trình TO-BE bằng BPMN 2.0.
+  \item Xây dựng Power/Interest Grid, RASCI Matrix, BPMN, Activity Diagram và Sequence Diagram cho các luồng nghiệp vụ chính.
+  \item Đề xuất cải tiến giúp giảm thời gian xử lý đơn hàng và loại bỏ các bước thừa trong quy trình.
+  \item Tài liệu: \link{https://docs.google.com/document/d/1WNMDAvptXeaWxipY-k5PPOL_7cVS6b8R/edit?usp=sharing&ouid=105379329389586303385&rtpof=true&sd=true}{Google Docs}
+\end{itemize}
+
+\role{Phân tích nghiệp vụ bán lẻ và ứng dụng Odoo}{01/2025 -- 04/2025}
+\begin{itemize}
+  \item Phân tích GAP giữa quy trình hiện tại và hệ thống ERP/Odoo, xác định vấn đề nghiệp vụ và đề xuất hướng xử lý.
+  \item Viết tài liệu SRS cho module quản lý kho, bao gồm use case, business rules và data dictionary.
+  \item Thiết kế Rich Picture, sơ đồ tổ chức, Use Case và Sequence Diagram cho các chức năng chính.
+  \item Tài liệu: \link{https://docs.google.com/document/d/1EErEOzBvqhhrRptvYHMm_D-_20e2K6s3/edit?usp=sharing&ouid=105379329389586303385&rtpof=true&sd=true}{Google Docs}
+  \item GitHub: \link{https://github.com/hunggthinhh/HTTTQL}{github.com/hunggthinhh/HTTTQL}
+\end{itemize}
+
+\role{La Pâtisserie -- Website đặt bánh online}{03/2025 -- 06/2025}
+\begin{itemize}
+  \item Thu thập yêu cầu từ chủ tiệm, phân tích chức năng đặt bánh online và viết user stories/acceptance criteria.
+  \item Thiết kế Use Case Diagram, Activity Diagram và Sequence Diagram cho đăng ký, đăng nhập, quên mật khẩu, tìm kiếm sản phẩm.
+  \item Phối hợp với nhóm phát triển để đảm bảo tính nhất quán giữa yêu cầu nghiệp vụ và sản phẩm triển khai.
+  \item Tài liệu: \link{https://docs.google.com/document/d/1iz-W5ofKHLroMQEQA46hOROq7BZu4A-W/edit?usp=sharing&ouid=105379329389586303385&rtpof=true&sd=true}{Google Docs}
+  \item GitHub: \link{https://github.com/hunggthinhh/Web_banhang}{github.com/hunggthinhh/Web\_banhang}
+\end{itemize}
+
+\cvsection{Học vấn}
+\role{Đại học Giao thông Vận tải TP.HCM (UTH)}{2021 -- 2025}
+\begin{itemize}
+  \item Ngành: Hệ thống Thông tin Quản lý
+  \item GPA: 3.37 / 4.0
+\end{itemize}
+
+\cvsection{Chứng chỉ}
+\begin{itemize}
+  \item Microsoft Office Specialist -- Associate, 2025. \link{https://drive.google.com/file/d/19YHQMBJcSWC0WykoXC2h37FjZIOEMbKy/view?usp=sharing}{Xem chứng chỉ}
+  \item Google Cloud Computing Certificate, 2025. \link{https://www.credly.com/badges/aa2988ac-c2ae-463f-a11c-4dadc8ed7764/facebook?fbclid=IwY2xjawTFmnpleHRuA2FlbQIxMQBzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEeZcb7swZnaxGZ17nb1KW2MhzzB1sOfRj2faR9Ebqbay1FSVw7SAEcJtbwpGs_aem_YXd10lnpqIzwoMFC8f1BFA}{Credly}
+\end{itemize}
+
+\cvsection{Ngôn ngữ}
+\begin{itemize}
+  \item Tiếng Việt: Bản ngữ
+  \item Tiếng Anh: B2 -- giao tiếp tốt, đọc hiểu tài liệu chuyên ngành
+\end{itemize}
+
+\end{document}
