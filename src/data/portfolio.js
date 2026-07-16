@@ -136,14 +136,18 @@ export const education = {
 
 export const certifications = [
   {
-    name: 'Google Data Analytics Professional Certificate',
-    issuer: 'Google - Coursera',
-    date: '2024',
+    name: 'Microsoft Office Specialist - Associate',
+    issuer: 'Microsoft',
+    date: '2025',
+    image: '/mos.png',
+    url: 'https://drive.google.com/file/d/19YHQMBJcSWC0WykoXC2h37FjZIOEMbKy/view?usp=sharing',
   },
   {
-    name: 'Agile & Scrum Fundamentals',
-    issuer: 'Coursera',
-    date: '2024',
+    name: 'Google Cloud Computing Certificate',
+    issuer: 'Google Cloud - Credly',
+    date: '2025',
+    image: '/gg.png',
+    url: 'https://www.credly.com/badges/aa2988ac-c2ae-463f-a11c-4dadc8ed7764/facebook?fbclid=IwY2xjawTFmnpleHRuA2FlbQIxMQBzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEeZcb7swZnaxGZ17nb1KW2MhzzB1sOfRj2faR9Ebqbay1FSVw7SAEcJtbwpGs_aem_YXd10lnpqIzwoMFC8f1BFA',
   },
 ]
 

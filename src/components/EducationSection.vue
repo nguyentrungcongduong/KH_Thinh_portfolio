@@ -1,5 +1,9 @@
 <script setup>
 import { education, certifications, languages } from '@/data/portfolio.js'
+
+function isValidLink(link) {
+  return typeof link === 'string' && link.trim() !== '' && link !== '#'
+}
 </script>
 
 <template>
@@ -66,15 +70,53 @@ import { education, certifications, languages } from '@/data/portfolio.js'
             :key="cert.name"
             data-animate
             :data-animate-delay="index + 2"
-            class="border-2 border-swiss-fg p-6 md:p-8 bg-white -mt-[2px] md:-mt-0 md:-ml-[2px] first:mt-0 first:ml-0 rounded-md"
+            class="border-2 border-swiss-fg bg-white -mt-[2px] md:-mt-0 md:-ml-[2px] first:mt-0 first:ml-0 rounded-md overflow-hidden"
           >
-            <p class="font-bold text-lg leading-snug">
-              {{ cert.name }}
-            </p>
-            <div class="flex items-center gap-3 mt-3">
-              <p class="text-sm text-gray-600">{{ cert.issuer }}</p>
-              <span class="w-1 h-1 bg-swiss-accent inline-block flex-shrink-0"></span>
-              <p class="text-sm text-gray-500">{{ cert.date }}</p>
+            <div
+              v-if="cert.image"
+              class="h-44 md:h-48 border-b-2 border-swiss-fg bg-swiss-muted flex items-center justify-center p-4"
+            >
+              <img
+                :src="cert.image"
+                :alt="cert.name"
+                class="max-h-full max-w-full object-contain"
+                loading="lazy"
+              >
+            </div>
+
+            <div class="p-6 md:p-8">
+              <p class="font-bold text-lg leading-snug">
+                {{ cert.name }}
+              </p>
+              <div class="flex flex-wrap items-center gap-3 mt-3">
+                <p class="text-sm text-gray-600">{{ cert.issuer }}</p>
+                <span class="w-1 h-1 bg-swiss-accent inline-block flex-shrink-0"></span>
+                <p class="text-sm text-gray-500">{{ cert.date }}</p>
+              </div>
+
+              <a
+                v-if="isValidLink(cert.url)"
+                :href="cert.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-6 inline-flex items-center gap-2 border-2 border-swiss-fg px-4 py-2 text-sm font-semibold bg-white text-swiss-fg rounded-md hover:bg-swiss-fg hover:text-white transition-colors duration-200 ease-out"
+              >
+                Xem chứng chỉ
+                <svg
+                  class="w-4 h-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="square"
+                  stroke-linejoin="miter"
+                  aria-hidden="true"
+                >
+                  <path d="M18 13v6H5V6h6" />
+                  <path d="M15 3h6v6" />
+                  <path d="M10 14L21 3" />
+                </svg>
+              </a>
             </div>
           </div>
         </div>
