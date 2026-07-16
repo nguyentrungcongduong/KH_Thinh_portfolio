@@ -12,6 +12,7 @@
     </Transition>
 
     <button
+      ref="button"
       type="button"
       class="firework-button"
       aria-label="Tặng pháo hoa"
@@ -23,20 +24,23 @@
     </button>
   </div>
 
-  <canvas
-    ref="canvas"
-    class="firework-canvas"
-    aria-hidden="true"
-  ></canvas>
+  <Teleport to="body">
+    <canvas
+      ref="canvas"
+      class="firework-canvas"
+      aria-hidden="true"
+    ></canvas>
+  </Teleport>
 </template>
 
 <script setup>
 import { onBeforeUnmount, ref } from 'vue'
 
 const canvas = ref(null)
+const button = ref(null)
 const showToast = ref(false)
 const particles = []
-const colors = ['#C84A2F', '#FAFAF7', '#FFD166', '#EF476F', '#7FDBCA']
+const colors = ['#C84A2F', '#16201C', '#FFD166', '#EF476F', '#118AB2', '#06D6A0', '#FAFAF7']
 
 let animationFrame = null
 let toastTimeout = null
@@ -68,9 +72,9 @@ function createBurst(x, y, count = 54) {
       lastY: y,
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed,
-      size: 2.8 + Math.random() * 4.4,
+      size: 3.4 + Math.random() * 5.2,
       alpha: 1,
-      decay: 0.009 + Math.random() * 0.012,
+      decay: 0.007 + Math.random() * 0.01,
       gravity: 0.035 + Math.random() * 0.035,
       color: colors[Math.floor(Math.random() * colors.length)],
     })
@@ -134,7 +138,7 @@ function startAnimation() {
   }
 }
 
-function launchFireworks() {
+function launchFireworks(event) {
   resizeCanvas()
   showToast.value = true
 
@@ -143,11 +147,16 @@ function launchFireworks() {
     showToast.value = false
   }, 3200)
 
+  const trigger = event?.currentTarget || button.value
+  const rect = trigger?.getBoundingClientRect()
+  const originX = rect ? rect.left + rect.width / 2 : window.innerWidth * 0.82
+  const originY = rect ? rect.top + rect.height / 2 : window.innerHeight * 0.5
   const bursts = [
-    [window.innerWidth * 0.68, window.innerHeight * 0.3, 76],
-    [window.innerWidth * 0.45, window.innerHeight * 0.42, 70],
-    [window.innerWidth * 0.78, window.innerHeight * 0.52, 72],
-    [window.innerWidth * 0.58, window.innerHeight * 0.62, 58],
+    [originX, originY, 88],
+    [Math.max(70, originX - 170), Math.max(90, originY - 115), 76],
+    [Math.max(80, originX - 280), Math.min(window.innerHeight - 80, originY + 90), 72],
+    [window.innerWidth * 0.5, window.innerHeight * 0.36, 62],
+    [window.innerWidth * 0.68, window.innerHeight * 0.62, 58],
   ]
 
   bursts.forEach(([x, y, count], index) => {

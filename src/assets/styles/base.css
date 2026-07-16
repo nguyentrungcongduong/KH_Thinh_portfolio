@@ -416,7 +416,7 @@
   .firework-canvas {
     position: fixed;
     inset: 0;
-    z-index: 90;
+    z-index: 1100;
     pointer-events: none;
   }
 
@@ -530,10 +530,6 @@ body.lightbox-open {
   .firework-toast-enter-active,
   .firework-toast-leave-active {
     transition: none;
-  }
-
-  .firework-canvas {
-    display: none;
   }
 
   .scroll-mood__wash {
