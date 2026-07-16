@@ -7,6 +7,8 @@
 \usepackage[utf8]{vietnam}
 \usepackage[T5]{fontenc}
 \usepackage[margin=0cm]{geometry}
+\usepackage{lmodern}
+\usepackage{microtype}
 \usepackage{xcolor}
 \usepackage{enumitem}
 \usepackage{hyperref}
@@ -14,15 +16,14 @@
 \usepackage{graphicx}
 \usepackage[absolute,overlay]{textpos}
 \usepackage{ifthen}
-\usepackage{tgheros}
 
-\renewcommand{\familydefault}{\sfdefault}
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
 \setlength{\TPHorizModule}{1cm}
 \setlength{\TPVertModule}{1cm}
-\setlist[itemize]{leftmargin=1em,itemsep=1pt,parsep=0pt,topsep=2pt}
+\setlist[itemize]{leftmargin=1em,itemsep=1.8pt,parsep=0pt,topsep=2pt}
+\linespread{1.035}
 
 %% --- Colors ---
 \definecolor{sidebar}{HTML}{16201C}
@@ -43,7 +44,7 @@
 %% --- Helpers ---
 \newcommand{\sidehead}[1]{%
   \vspace{7pt}{\color{accent}\rule{1.55cm}{2.2pt}}\\[3pt]%
-  {\color{white}\small\bfseries\MakeUppercase{#1}}\\[4pt]%
+  {\color{white}\small\bfseries #1}\\[4pt]%
 }
 
 \newcommand{\contactrow}[2]{%
@@ -60,12 +61,12 @@
 }
 
 \newcommand{\tooltag}[1]{%
-  \tikz[baseline=(t.base)]{\node[fill=sidelight,text=textlight,inner sep=2.5pt,font=\scriptsize](t){#1};}\,%
+  \tikz[baseline=(t.base)]{\node[fill=sidelight,text=textlight,inner sep=2.4pt,font=\scriptsize](t){#1};}\,%
 }
 
 \newcommand{\mainhead}[1]{%
-  \vspace{7pt}{\color{darktext}\normalsize\bfseries\MakeUppercase{#1}}\\[-3pt]%
-  {\color{accent}\rule{\linewidth}{1.45pt}}\\[4pt]%
+  \vspace{7pt}{\color{darktext}\large\bfseries #1}\\[-3pt]%
+  {\color{accent}\rule{\linewidth}{1.35pt}}\\[4pt]%
 }
 
 \newcommand{\mtag}[1]{%
@@ -104,7 +105,7 @@
          \node[text=white,font=\bfseries\Large] at (0,0) {PHT};}
     \end{scope}
   \end{tikzpicture}\\[3pt]
-  {\scriptsize\color{textweak}\MakeUppercase{Business Analyst Intern}}\\[1pt]
+  {\scriptsize\color{textweak}Business Analyst Intern}\\[1pt]
   {\color{accent}\rule{2cm}{2pt}}
 \end{center}
 
@@ -149,9 +150,9 @@
 \begin{textblock*}{12.55cm}(7.85cm,0.62cm)
 \raggedright\color{darktext}
 
-{\fontsize{25pt}{29pt}\selectfont\bfseries PHAN HÙNG THỊNH}\\[4pt]
-{\large\color{accent}\bfseries THỰC TẬP SINH BUSINESS ANALYST}\\[5pt]
-{\color{accent}\rule{\linewidth}{2.4pt}}
+{\fontsize{25pt}{29pt}\selectfont\bfseries Phan Hùng Thịnh}\\[3pt]
+{\large\color{accent}\bfseries Thực tập sinh Business Analyst}\\[5pt]
+{\color{accent}\rule{\linewidth}{2.2pt}}
 
 \mainhead{Tóm tắt}
 {\small Sinh viên năm cuối ngành Hệ thống Thông tin Quản lý tại Đại học GTVT TP.HCM (UTH), định hướng Business Analyst. Có kinh nghiệm khảo sát yêu cầu, mô hình hoá quy trình BPMN, phân tích GAP, viết tài liệu SRS, xây dựng UML diagrams và phối hợp nhóm trong các dự án phân tích hệ thống. Quan tâm đến tối ưu quy trình doanh nghiệp và chuyển đổi số.}
