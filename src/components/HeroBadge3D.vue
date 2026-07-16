@@ -17,7 +17,8 @@ let renderer
 let scene
 let camera
 let badge
-let lanyard
+let lanyards = []
+let anchorRing
 let anchor
 let animationFrame
 let resizeObserver
@@ -25,11 +26,13 @@ let texture
 let pointerId = null
 let isDragging = false
 let targetX = 0
-let targetY = -0.65
+let targetY = -0.9
 let velocityX = 0
 let velocityY = 0
 let currentX = 0
-let currentY = -0.65
+let currentY = -0.9
+let lastX = 0
+let lastY = -0.9
 let startedAt = 0
 
 const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches
@@ -126,7 +129,7 @@ async function setupScene() {
 
   scene = new THREE.Scene()
   camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100)
-  camera.position.set(0, 0, 9)
+  camera.position.set(0, 0, 11.4)
 
   renderer = new THREE.WebGLRenderer({
     alpha: true,
@@ -144,7 +147,7 @@ async function setupScene() {
   rim.position.set(-3, -1, 3)
   scene.add(ambient, key, rim)
 
-  anchor = new THREE.Vector3(0, 3.25, 0)
+  anchor = new THREE.Vector3(0, 2.22, 0.08)
   texture = createBadgeTexture()
   texture.colorSpace = THREE.SRGBColorSpace
 
@@ -163,7 +166,7 @@ async function setupScene() {
   badge.castShadow = false
   scene.add(badge)
 
-  const clipGeometry = new THREE.TorusGeometry(0.25, 0.035, 12, 48)
+  const clipGeometry = new THREE.TorusGeometry(0.28, 0.045, 12, 48)
   const clipMaterial = new THREE.MeshStandardMaterial({
     color: 0xc84a2f,
     roughness: 0.35,
@@ -174,14 +177,28 @@ async function setupScene() {
   clip.rotation.x = Math.PI / 2
   badge.add(clip)
 
-  const lineMaterial = new THREE.LineBasicMaterial({
+  anchorRing = new THREE.Mesh(
+    new THREE.TorusGeometry(0.22, 0.055, 12, 48),
+    new THREE.MeshStandardMaterial({
+      color: 0xfafaf7,
+      roughness: 0.4,
+      metalness: 0.15,
+    }),
+  )
+  anchorRing.position.copy(anchor)
+  anchorRing.rotation.x = Math.PI / 2
+  scene.add(anchorRing)
+
+  const strapMaterial = new THREE.MeshStandardMaterial({
     color: 0xfafaf7,
-    transparent: true,
-    opacity: 0.9,
-    linewidth: 2,
+      roughness: 0.42,
+      metalness: 0.08,
   })
-  lanyard = new THREE.Line(new THREE.BufferGeometry(), lineMaterial)
-  scene.add(lanyard)
+  lanyards = [
+    new THREE.Mesh(new THREE.BufferGeometry(), strapMaterial),
+    new THREE.Mesh(new THREE.BufferGeometry(), strapMaterial.clone()),
+  ]
+  lanyards.forEach((strap) => scene.add(strap))
 
   resizeObserver = new ResizeObserver(resizeRenderer)
   resizeObserver.observe(element)
@@ -225,7 +242,7 @@ function handlePointerDown(event) {
   renderer.domElement.setPointerCapture(pointerId)
   const point = pointerToWorld(event)
   targetX = THREE.MathUtils.clamp(point.x, -2.1, 2.1)
-  targetY = THREE.MathUtils.clamp(point.y - 0.2, -1.85, 1.2)
+  targetY = THREE.MathUtils.clamp(point.y - 0.34, -1.9, 0.08)
 }
 
 function handlePointerMove(event) {
@@ -233,7 +250,7 @@ function handlePointerMove(event) {
 
   const point = pointerToWorld(event)
   targetX = THREE.MathUtils.clamp(point.x, -2.1, 2.1)
-  targetY = THREE.MathUtils.clamp(point.y - 0.2, -1.85, 1.2)
+  targetY = THREE.MathUtils.clamp(point.y - 0.34, -1.9, 0.08)
 }
 
 function handlePointerUp(event) {
@@ -243,41 +260,62 @@ function handlePointerUp(event) {
   renderer.domElement.releasePointerCapture(pointerId)
   pointerId = null
   targetX = 0
-  targetY = -0.65
+  targetY = -0.9
 }
 
 function updateLanyard() {
-  const top = new THREE.Vector3(
-    badge.position.x,
-    badge.position.y + 1.58,
-    badge.position.z,
-  )
-  const middleA = new THREE.Vector3(anchor.x - 0.28, 2.35, 0.08)
-  const middleB = new THREE.Vector3((anchor.x + top.x) * 0.45, 1.78, 0.12)
-  const curve = new THREE.CatmullRomCurve3([anchor, middleA, middleB, top])
-  const points = curve.getPoints(28)
-  lanyard.geometry.dispose()
-  lanyard.geometry = new THREE.BufferGeometry().setFromPoints(points)
+  const swing = badge.rotation.z
+  const leftTop = new THREE.Vector3(-0.42, 1.58, 0.1).applyEuler(badge.rotation).add(badge.position)
+  const rightTop = new THREE.Vector3(0.42, 1.58, 0.1).applyEuler(badge.rotation).add(badge.position)
+  const sway = currentX * 0.18 + velocityX * 0.45
+  const basePoints = [
+    [
+      new THREE.Vector3(anchor.x - 0.18, anchor.y - 0.02, anchor.z),
+      new THREE.Vector3(anchor.x - 0.46 + sway, anchor.y - 0.5, 0.22),
+      new THREE.Vector3(leftTop.x - 0.12, leftTop.y + 0.38, 0.2),
+      leftTop,
+    ],
+    [
+      new THREE.Vector3(anchor.x + 0.18, anchor.y - 0.02, anchor.z),
+      new THREE.Vector3(anchor.x + 0.46 + sway, anchor.y - 0.54, 0.2),
+      new THREE.Vector3(rightTop.x + 0.12, rightTop.y + 0.38, 0.2),
+      rightTop,
+    ],
+  ]
+
+  anchorRing.rotation.z = swing * -0.45
+
+  basePoints.forEach((points, index) => {
+    const curve = new THREE.CatmullRomCurve3(points)
+    const geometry = new THREE.TubeGeometry(curve, 32, 0.05, 8, false)
+    lanyards[index].geometry.dispose()
+    lanyards[index].geometry = geometry
+  })
 }
 
 function animate() {
   const elapsed = (performance.now() - startedAt) / 1000
-  const spring = isDragging ? 0.35 : 0.08
-  const damping = isDragging ? 0.68 : 0.9
-  const idleX = prefersReducedMotion ? 0 : Math.sin(elapsed * 0.8) * 0.13
-  const idleY = prefersReducedMotion ? -0.65 : -0.65 + Math.sin(elapsed * 1.15) * 0.08
+  const spring = isDragging ? 0.25 : 0.045
+  const damping = isDragging ? 0.62 : 0.84
+  const idleX = prefersReducedMotion ? 0 : Math.sin(elapsed * 0.58) * 0.16 + Math.sin(elapsed * 1.1) * 0.035
+  const idleY = prefersReducedMotion ? -0.9 : -0.94 + Math.sin(elapsed * 0.9) * 0.045
   const desiredX = isDragging ? targetX : idleX
   const desiredY = isDragging ? targetY : idleY
 
+  lastX = currentX
+  lastY = currentY
   velocityX = (velocityX + (desiredX - currentX) * spring) * damping
   velocityY = (velocityY + (desiredY - currentY) * spring) * damping
   currentX += velocityX
   currentY += velocityY
 
+  const frameX = currentX - lastX
+  const frameY = currentY - lastY
+
   badge.position.set(currentX, currentY, 0)
-  badge.rotation.z = THREE.MathUtils.clamp(-velocityX * 0.28 + currentX * -0.13, -0.34, 0.34)
-  badge.rotation.x = THREE.MathUtils.clamp(velocityY * 0.12, -0.18, 0.18)
-  badge.rotation.y = THREE.MathUtils.clamp(currentX * 0.14, -0.25, 0.25)
+  badge.rotation.z = THREE.MathUtils.clamp(-frameX * 5.8 + currentX * -0.1, -0.28, 0.28)
+  badge.rotation.x = THREE.MathUtils.clamp(frameY * 2.4, -0.14, 0.14)
+  badge.rotation.y = THREE.MathUtils.clamp(currentX * 0.11 + frameX * 1.8, -0.2, 0.2)
 
   updateLanyard()
   renderer.render(scene, camera)
@@ -302,8 +340,12 @@ onBeforeUnmount(() => {
   }
 
   texture?.dispose()
-  lanyard?.geometry.dispose()
-  lanyard?.material.dispose()
+  anchorRing?.geometry.dispose()
+  anchorRing?.material.dispose()
+  lanyards.forEach((strap) => {
+    strap.geometry.dispose()
+    strap.material.dispose()
+  })
 
   if (badge) {
     badge.geometry.dispose()
