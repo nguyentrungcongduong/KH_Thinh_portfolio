@@ -18,11 +18,13 @@ let scene
 let camera
 let badge
 let lanyards = []
-let anchorRing
+let strapGroup
+let hookGroup
 let anchor
 let animationFrame
 let resizeObserver
 let texture
+let strapTexture
 let pointerId = null
 let isDragging = false
 let targetX = 0
@@ -44,57 +46,95 @@ function createBadgeTexture() {
   canvas.height = 1200
   const context = canvas.getContext('2d')
 
-  context.fillStyle = '#FAFAF7'
+  context.fillStyle = '#050606'
   context.fillRect(0, 0, canvas.width, canvas.height)
 
-  context.fillStyle = '#16201C'
-  context.fillRect(0, 0, canvas.width, 190)
+  const gradient = context.createLinearGradient(0, 0, canvas.width, canvas.height)
+  gradient.addColorStop(0, 'rgba(255,255,255,0.08)')
+  gradient.addColorStop(0.45, 'rgba(255,255,255,0.015)')
+  gradient.addColorStop(1, 'rgba(200,74,47,0.045)')
+  context.fillStyle = gradient
+  context.fillRect(0, 0, canvas.width, canvas.height)
 
-  context.fillStyle = '#C84A2F'
-  context.fillRect(0, 190, canvas.width, 14)
+  context.fillStyle = 'rgba(250,250,247,0.72)'
+  context.font = '700 20px "Open Sans", Arial, sans-serif'
+  context.fillText('24/KW/29 BA', 58, 72)
+  context.fillText('UTH  HCMC CITY', 610, 72)
 
-  context.fillStyle = '#FFFFFF'
-  context.font = '700 48px "Open Sans", Arial, sans-serif'
-  context.fillText('BUSINESS ANALYST', 64, 116)
-
-  context.strokeStyle = '#16201C'
-  context.lineWidth = 10
-  context.strokeRect(38, 38, canvas.width - 76, canvas.height - 76)
+  context.fillStyle = '#FAFAF7'
+  context.font = '900 178px "Montserrat", "Open Sans", Arial, sans-serif'
+  context.fillText('B', 355, 315)
+  context.fillRect(365, 410, 42, 128)
+  context.fillRect(503, 410, 42, 128)
+  context.fillRect(418, 485, 75, 34)
+  context.font = '900 218px "Montserrat", "Open Sans", Arial, sans-serif'
+  context.fillText('A', 548, 642)
 
   context.fillStyle = '#C84A2F'
   context.beginPath()
-  context.arc(144, 320, 60, 0, Math.PI * 2)
+  context.moveTo(65, 455)
+  context.lineTo(98, 398)
+  context.lineTo(130, 455)
+  context.closePath()
   context.fill()
 
-  context.fillStyle = '#16201C'
-  context.font = '800 92px "Open Sans", Arial, sans-serif'
-  context.fillText('PHT.', 220, 350)
-
-  context.font = '800 64px "Open Sans", Arial, sans-serif'
-  wrapText(context, personalInfo.name, 64, 530, 720, 80)
-
-  context.fillStyle = 'rgba(22, 32, 28, 0.74)'
-  context.font = '700 38px "Open Sans", Arial, sans-serif'
-  wrapText(context, personalInfo.title, 64, 680, 720, 54)
-
-  context.strokeStyle = '#C84A2F'
-  context.lineWidth = 6
+  context.fillStyle = '#FAFAF7'
   context.beginPath()
-  context.moveTo(64, 790)
-  context.lineTo(836, 790)
-  context.stroke()
+  context.arc(112, 500, 9, 0, Math.PI * 2)
+  context.fill()
 
-  context.fillStyle = '#16201C'
-  context.font = '700 32px "Open Sans", Arial, sans-serif'
-  context.fillText('REQUIREMENTS', 64, 880)
-  context.fillText('BPMN', 64, 946)
-  context.fillText('SRS', 64, 1012)
-  context.fillText('GAP ANALYSIS', 64, 1078)
+  context.font = '800 50px "Open Sans", Arial, sans-serif'
+  wrapText(context, personalInfo.name, 70, 720, 520, 58)
 
-  context.fillStyle = '#C84A2F'
-  ;[855, 921, 987, 1053].forEach((y) => {
-    context.fillRect(760, y, 76, 26)
+  context.fillStyle = 'rgba(250,250,247,0.62)'
+  context.font = '700 22px "Open Sans", Arial, sans-serif'
+  context.fillText('BUSINESS ANALYST INTERN', 72, 850)
+
+  context.fillStyle = 'rgba(250,250,247,0.52)'
+  context.font = '700 19px "Open Sans", Arial, sans-serif'
+  context.fillText('PROCESS / BPMN', 72, 1050)
+  context.fillText('SRS / GAP ANALYSIS', 72, 1084)
+
+  context.fillStyle = '#FAFAF7'
+  context.fillRect(670, 1068, 96, 18)
+
+  return new THREE.CanvasTexture(canvas)
+}
+
+function createStrapTexture() {
+  const canvas = document.createElement('canvas')
+  canvas.width = 220
+  canvas.height = 900
+  const context = canvas.getContext('2d')
+
+  context.fillStyle = '#050606'
+  context.fillRect(0, 0, canvas.width, canvas.height)
+  context.fillStyle = 'rgba(255,255,255,0.08)'
+  context.fillRect(8, 0, 16, canvas.height)
+  context.fillRect(canvas.width - 24, 0, 12, canvas.height)
+
+  context.save()
+  context.translate(152, 180)
+  context.rotate(-Math.PI / 2)
+  context.fillStyle = '#FAFAF7'
+  context.font = '800 64px "Montserrat", "Open Sans", Arial, sans-serif'
+  context.fillText('PHT.', 0, 0)
+  context.restore()
+
+  context.strokeStyle = 'rgba(250,250,247,0.86)'
+  context.lineWidth = 10
+  ;[330, 485].forEach((y) => {
+    context.beginPath()
+    context.arc(110, y, 28, 0, Math.PI * 2)
+    context.stroke()
   })
+
+  context.fillStyle = '#FAFAF7'
+  context.font = '800 34px "Open Sans", Arial, sans-serif'
+  context.strokeStyle = '#FAFAF7'
+  context.lineWidth = 7
+  context.strokeRect(82, 610, 56, 56)
+  context.fillText('24', 88, 651)
 
   return new THREE.CanvasTexture(canvas)
 }
@@ -147,18 +187,20 @@ async function setupScene() {
   rim.position.set(-3, -1, 3)
   scene.add(ambient, key, rim)
 
-  anchor = new THREE.Vector3(0, 2.22, 0.08)
+  anchor = new THREE.Vector3(0, 2.55, 0.12)
   texture = createBadgeTexture()
   texture.colorSpace = THREE.SRGBColorSpace
+  strapTexture = createStrapTexture()
+  strapTexture.colorSpace = THREE.SRGBColorSpace
 
-  const badgeGeometry = new THREE.BoxGeometry(2.25, 3.15, 0.08, 4, 4, 1)
+  const badgeGeometry = new THREE.BoxGeometry(1.9, 2.55, 0.1, 4, 4, 1)
   const badgeMaterials = [
-    new THREE.MeshStandardMaterial({ color: 0x16201c, roughness: 0.55, metalness: 0.08 }),
-    new THREE.MeshStandardMaterial({ color: 0x16201c, roughness: 0.55, metalness: 0.08 }),
-    new THREE.MeshStandardMaterial({ color: 0xfafaf7, roughness: 0.7, metalness: 0.02 }),
-    new THREE.MeshStandardMaterial({ color: 0xfafaf7, roughness: 0.7, metalness: 0.02 }),
-    new THREE.MeshStandardMaterial({ map: texture, roughness: 0.62, metalness: 0.03 }),
-    new THREE.MeshStandardMaterial({ color: 0x16201c, roughness: 0.7, metalness: 0.02 }),
+    new THREE.MeshStandardMaterial({ color: 0x080909, roughness: 0.48, metalness: 0.16 }),
+    new THREE.MeshStandardMaterial({ color: 0x080909, roughness: 0.48, metalness: 0.16 }),
+    new THREE.MeshStandardMaterial({ color: 0x080909, roughness: 0.56, metalness: 0.12 }),
+    new THREE.MeshStandardMaterial({ color: 0x080909, roughness: 0.56, metalness: 0.12 }),
+    new THREE.MeshStandardMaterial({ map: texture, roughness: 0.5, metalness: 0.08 }),
+    new THREE.MeshStandardMaterial({ color: 0x050606, roughness: 0.56, metalness: 0.12 }),
   ]
 
   badge = new THREE.Mesh(badgeGeometry, badgeMaterials)
@@ -166,39 +208,62 @@ async function setupScene() {
   badge.castShadow = false
   scene.add(badge)
 
-  const clipGeometry = new THREE.TorusGeometry(0.28, 0.045, 12, 48)
+  const clipGeometry = new THREE.TorusGeometry(0.18, 0.032, 12, 48)
   const clipMaterial = new THREE.MeshStandardMaterial({
-    color: 0xc84a2f,
-    roughness: 0.35,
-    metalness: 0.25,
+    color: 0x050606,
+    roughness: 0.28,
+    metalness: 0.7,
   })
   const clip = new THREE.Mesh(clipGeometry, clipMaterial)
-  clip.position.set(0, 1.6, 0.08)
+  clip.position.set(0, 1.34, 0.11)
   clip.rotation.x = Math.PI / 2
   badge.add(clip)
 
-  anchorRing = new THREE.Mesh(
-    new THREE.TorusGeometry(0.22, 0.055, 12, 48),
-    new THREE.MeshStandardMaterial({
-      color: 0xfafaf7,
-      roughness: 0.4,
-      metalness: 0.15,
-    }),
-  )
-  anchorRing.position.copy(anchor)
-  anchorRing.rotation.x = Math.PI / 2
-  scene.add(anchorRing)
-
+  strapGroup = new THREE.Group()
   const strapMaterial = new THREE.MeshStandardMaterial({
-    color: 0xfafaf7,
-      roughness: 0.42,
-      metalness: 0.08,
+    map: strapTexture,
+    roughness: 0.5,
+    metalness: 0.18,
+  })
+  const strap = new THREE.Mesh(
+    new THREE.BoxGeometry(0.34, 2.55, 0.055, 1, 12, 1),
+    strapMaterial,
+  )
+  strap.position.set(0, 1.38, 0.04)
+  strapGroup.add(strap)
+
+  const metalMaterial = new THREE.MeshStandardMaterial({
+    color: 0x1b1c1c,
+    roughness: 0.24,
+    metalness: 0.82,
+  })
+  const strapBottomRing = new THREE.Mesh(new THREE.TorusGeometry(0.18, 0.035, 14, 48), metalMaterial)
+  strapBottomRing.position.set(0, 0.03, 0.08)
+  strapBottomRing.rotation.x = Math.PI / 2
+  strapGroup.add(strapBottomRing)
+  scene.add(strapGroup)
+
+  hookGroup = new THREE.Group()
+  const swivel = new THREE.Mesh(new THREE.TorusGeometry(0.15, 0.026, 14, 48), metalMaterial)
+  swivel.position.set(0, 0.2, 0.1)
+  swivel.rotation.x = Math.PI / 2
+  hookGroup.add(swivel)
+
+  const hookStem = new THREE.Mesh(new THREE.CapsuleGeometry(0.035, 0.3, 8, 16), metalMaterial)
+  hookStem.position.set(0, -0.05, 0.1)
+  hookStem.rotation.z = 0.08
+  hookGroup.add(hookStem)
+  scene.add(hookGroup)
+
+  const connectorMaterial = new THREE.MeshStandardMaterial({
+    color: 0x111313,
+    roughness: 0.3,
+    metalness: 0.68,
   })
   lanyards = [
-    new THREE.Mesh(new THREE.BufferGeometry(), strapMaterial),
-    new THREE.Mesh(new THREE.BufferGeometry(), strapMaterial.clone()),
+    new THREE.Mesh(new THREE.BufferGeometry(), connectorMaterial),
   ]
-  lanyards.forEach((strap) => scene.add(strap))
+  lanyards.forEach((connector) => scene.add(connector))
 
   resizeObserver = new ResizeObserver(resizeRenderer)
   resizeObserver.observe(element)
@@ -242,7 +307,7 @@ function handlePointerDown(event) {
   renderer.domElement.setPointerCapture(pointerId)
   const point = pointerToWorld(event)
   targetX = THREE.MathUtils.clamp(point.x, -2.1, 2.1)
-  targetY = THREE.MathUtils.clamp(point.y - 0.34, -1.9, 0.08)
+  targetY = THREE.MathUtils.clamp(point.y - 0.34, -1.9, -0.25)
 }
 
 function handlePointerMove(event) {
@@ -250,7 +315,7 @@ function handlePointerMove(event) {
 
   const point = pointerToWorld(event)
   targetX = THREE.MathUtils.clamp(point.x, -2.1, 2.1)
-  targetY = THREE.MathUtils.clamp(point.y - 0.34, -1.9, 0.08)
+  targetY = THREE.MathUtils.clamp(point.y - 0.34, -1.9, -0.25)
 }
 
 function handlePointerUp(event) {
@@ -265,32 +330,19 @@ function handlePointerUp(event) {
 
 function updateLanyard() {
   const swing = badge.rotation.z
-  const leftTop = new THREE.Vector3(-0.42, 1.58, 0.1).applyEuler(badge.rotation).add(badge.position)
-  const rightTop = new THREE.Vector3(0.42, 1.58, 0.1).applyEuler(badge.rotation).add(badge.position)
-  const sway = currentX * 0.18 + velocityX * 0.45
-  const basePoints = [
-    [
-      new THREE.Vector3(anchor.x - 0.18, anchor.y - 0.02, anchor.z),
-      new THREE.Vector3(anchor.x - 0.46 + sway, anchor.y - 0.5, 0.22),
-      new THREE.Vector3(leftTop.x - 0.12, leftTop.y + 0.38, 0.2),
-      leftTop,
-    ],
-    [
-      new THREE.Vector3(anchor.x + 0.18, anchor.y - 0.02, anchor.z),
-      new THREE.Vector3(anchor.x + 0.46 + sway, anchor.y - 0.54, 0.2),
-      new THREE.Vector3(rightTop.x + 0.12, rightTop.y + 0.38, 0.2),
-      rightTop,
-    ],
-  ]
+  const top = new THREE.Vector3(0, 1.34, 0.13).applyEuler(badge.rotation).add(badge.position)
+  const strapEnd = new THREE.Vector3(anchor.x, 0.03, anchor.z)
+  const sway = currentX * 0.1 + velocityX * 0.25
+  const middle = new THREE.Vector3((top.x + strapEnd.x) * 0.5 + sway, top.y + 0.22, 0.18)
+  const curve = new THREE.CatmullRomCurve3([strapEnd, middle, top])
+  const geometry = new THREE.TubeGeometry(curve, 28, 0.035, 8, false)
 
-  anchorRing.rotation.z = swing * -0.45
+  lanyards[0].geometry.dispose()
+  lanyards[0].geometry = geometry
 
-  basePoints.forEach((points, index) => {
-    const curve = new THREE.CatmullRomCurve3(points)
-    const geometry = new THREE.TubeGeometry(curve, 32, 0.05, 8, false)
-    lanyards[index].geometry.dispose()
-    lanyards[index].geometry = geometry
-  })
+  hookGroup.position.set((top.x + strapEnd.x) * 0.5, (top.y + strapEnd.y) * 0.5 + 0.06, 0.02)
+  hookGroup.rotation.z = swing * 0.55 + currentX * -0.04
+  strapGroup.rotation.z = currentX * -0.018
 }
 
 function animate() {
@@ -340,11 +392,18 @@ onBeforeUnmount(() => {
   }
 
   texture?.dispose()
-  anchorRing?.geometry.dispose()
-  anchorRing?.material.dispose()
-  lanyards.forEach((strap) => {
-    strap.geometry.dispose()
-    strap.material.dispose()
+  strapTexture?.dispose()
+  strapGroup?.traverse((node) => {
+    node.geometry?.dispose()
+    node.material?.dispose()
+  })
+  hookGroup?.traverse((node) => {
+    node.geometry?.dispose()
+    node.material?.dispose()
+  })
+  lanyards.forEach((connector) => {
+    connector.geometry.dispose()
+    connector.material.dispose()
   })
 
   if (badge) {
