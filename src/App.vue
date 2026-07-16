@@ -41,6 +41,7 @@
     </main>
 
     <FooterSection />
+    <FireworkButton />
 
     <Transition name="image-lightbox-fade">
       <div
@@ -89,6 +90,7 @@ import SkillsSection from '@/components/SkillsSection.vue'
 import EducationSection from '@/components/EducationSection.vue'
 import ContactSection from '@/components/ContactSection.vue'
 import FooterSection from '@/components/FooterSection.vue'
+import FireworkButton from '@/components/FireworkButton.vue'
 
 const showLoader = ref(true)
 const activeImage = ref(null)
