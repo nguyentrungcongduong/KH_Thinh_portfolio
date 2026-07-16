@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { projects } from '@/data/portfolio.js'
 
 const expandedCards = ref({})
+const activeImageIndexes = ref({})
 
 function toggleCard(id) {
   expandedCards.value[id] = !expandedCards.value[id]
@@ -27,6 +28,45 @@ function isValidLink(link) {
 
 function hasProjectLinks(project) {
   return project.links && Object.values(project.links).some(isValidLink)
+}
+
+function projectImages(project) {
+  return Array.isArray(project.images) ? project.images : []
+}
+
+function currentImageIndex(project) {
+  const images = projectImages(project)
+
+  if (!images.length) {
+    return 0
+  }
+
+  const index = activeImageIndexes.value[project.id] ?? 0
+  return ((index % images.length) + images.length) % images.length
+}
+
+function currentProjectImage(project) {
+  return projectImages(project)[currentImageIndex(project)]
+}
+
+function showPreviousImage(project) {
+  const images = projectImages(project)
+
+  if (images.length < 2) {
+    return
+  }
+
+  activeImageIndexes.value[project.id] = currentImageIndex(project) - 1
+}
+
+function showNextImage(project) {
+  const images = projectImages(project)
+
+  if (images.length < 2) {
+    return
+  }
+
+  activeImageIndexes.value[project.id] = currentImageIndex(project) + 1
 }
 </script>
 
@@ -89,7 +129,7 @@ function hasProjectLinks(project) {
         <div
           class="overflow-hidden transition-all duration-200 ease-out"
           :style="{
-            maxHeight: isExpanded(project.id) ? '2000px' : '0px',
+            maxHeight: isExpanded(project.id) ? '2800px' : '0px',
             opacity: isExpanded(project.id) ? 1 : 0
           }"
         >
@@ -175,18 +215,87 @@ function hasProjectLinks(project) {
                     </p>
                   </div>
 
-                  <!-- Image Placeholders -->
+                  <!-- Project Images -->
                   <div>
                     <h4 class="eyebrow mb-3">
                       Sơ đồ
                     </h4>
-                    <div class="grid grid-cols-2 gap-3">
-                      <div class="bg-swiss-muted border-2 border-swiss-fg aspect-video flex items-center justify-center rounded-md">
-                        <span class="text-xs font-semibold text-swiss-fg/30 select-none">
-                          Diagram
-                        </span>
+                    <div
+                      v-if="projectImages(project).length"
+                      class="border-2 border-swiss-fg bg-white rounded-md overflow-hidden"
+                      role="region"
+                      :aria-label="`Sơ đồ ${project.name}`"
+                    >
+                      <div class="relative bg-swiss-muted border-b-2 border-swiss-fg">
+                        <img
+                          :src="currentProjectImage(project).src"
+                          :alt="currentProjectImage(project).alt"
+                          class="w-full h-72 md:h-80 object-contain p-3"
+                          loading="lazy"
+                        >
+
+                        <button
+                          v-if="projectImages(project).length > 1"
+                          type="button"
+                          class="absolute left-3 top-1/2 -translate-y-1/2 grid h-10 w-10 place-items-center border-2 border-swiss-fg bg-white text-swiss-fg rounded-md hover:bg-swiss-fg hover:text-white transition-colors duration-200 ease-out"
+                          aria-label="Xem ảnh trước"
+                          @click.stop="showPreviousImage(project)"
+                        >
+                          <svg
+                            class="h-5 w-5"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="square"
+                            stroke-linejoin="miter"
+                            aria-hidden="true"
+                          >
+                            <path d="M15 18l-6-6 6-6" />
+                          </svg>
+                        </button>
+
+                        <button
+                          v-if="projectImages(project).length > 1"
+                          type="button"
+                          class="absolute right-3 top-1/2 -translate-y-1/2 grid h-10 w-10 place-items-center border-2 border-swiss-fg bg-white text-swiss-fg rounded-md hover:bg-swiss-fg hover:text-white transition-colors duration-200 ease-out"
+                          aria-label="Xem ảnh tiếp theo"
+                          @click.stop="showNextImage(project)"
+                        >
+                          <svg
+                            class="h-5 w-5"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="square"
+                            stroke-linejoin="miter"
+                            aria-hidden="true"
+                          >
+                            <path d="M9 6l6 6-6 6" />
+                          </svg>
+                        </button>
                       </div>
-                      <div class="bg-swiss-muted border-2 border-swiss-fg aspect-video flex items-center justify-center rounded-md">
+
+                      <div class="flex items-center justify-between gap-4 px-4 py-3">
+                        <p class="text-sm font-semibold text-swiss-fg/75">
+                          {{ currentProjectImage(project).caption || currentProjectImage(project).alt }}
+                        </p>
+                        <p class="text-xs font-bold text-swiss-accent flex-shrink-0">
+                          {{ currentImageIndex(project) + 1 }} / {{ projectImages(project).length }}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div
+                      v-else
+                      class="grid grid-cols-2 gap-3"
+                    >
+                      <div
+                        v-for="placeholder in 2"
+                        :key="placeholder"
+                        class="bg-swiss-muted border-2 border-swiss-fg aspect-video flex items-center justify-center rounded-md"
+                      >
                         <span class="text-xs font-semibold text-swiss-fg/30 select-none">
                           Diagram
                         </span>

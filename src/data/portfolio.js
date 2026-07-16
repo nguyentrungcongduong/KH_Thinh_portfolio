@@ -93,7 +93,28 @@ export const projects = [
       'Hoàn thành phân tích yêu cầu và thiết kế cho 8 use cases chính. Website được deploy thành công với đầy đủ chức năng đặt bánh online.',
     lessons:
       'Kinh nghiệm làm việc trực tiếp với team dev, hiểu rõ hơn về Agile workflow và cách viết user stories hiệu quả.',
-    images: [],
+    images: [
+      {
+        src: '/du_an3/du_an3.png',
+        alt: 'Sequence Diagram - Dang ky',
+        caption: 'Sequence Diagram - Dang ky',
+      },
+      {
+        src: '/du_an3/du_an3.1.png',
+        alt: 'Sequence Diagram - Dang nhap',
+        caption: 'Sequence Diagram - Dang nhap',
+      },
+      {
+        src: '/du_an3/du_an3.2.png',
+        alt: 'Sequence Diagram - Quen mat khau',
+        caption: 'Sequence Diagram - Quen mat khau',
+      },
+      {
+        src: '/du_an3/du_an3.3.png',
+        alt: 'Sequence Diagram - Tim kiem san pham',
+        caption: 'Sequence Diagram - Tim kiem san pham',
+      },
+    ],
     links: {
       drive: '#',
       figma: '#',
