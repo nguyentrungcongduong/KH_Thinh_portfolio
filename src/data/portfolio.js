@@ -47,7 +47,38 @@ export const projects = [
       'Đề xuất quy trình TO-BE giúp giảm 30% thời gian xử lý đơn hàng, loại bỏ 3 bước thừa trong quy trình.',
     lessons:
       'Học được cách đặt câu hỏi đúng khi khảo sát stakeholders, và tầm quan trọng của việc validate quy trình với người dùng cuối.',
-    images: [],
+    images: [
+      {
+        src: '/du_an1/du_an1.png',
+        alt: 'Power/Interest Grid - Shopee',
+        caption: 'Power/Interest Grid - Shopee',
+      },
+      {
+        src: '/du_an1/du_an1.1.png',
+        alt: 'Ma tran RASCI - Shopee',
+        caption: 'Ma tran RASCI - Shopee',
+      },
+      {
+        src: '/du_an1/du_an1.2.png',
+        alt: 'BPMN As-is - Quy trinh dang san pham',
+        caption: 'BPMN As-is - Quy trinh dang san pham',
+      },
+      {
+        src: '/du_an1/du_an1.3.png',
+        alt: 'Sequence Diagram - Tham gia khuyen mai va Marketing',
+        caption: 'Sequence Diagram - Tham gia khuyen mai va Marketing',
+      },
+      {
+        src: '/du_an1/du_an1.4.png',
+        alt: 'Sequence Diagram - Xu ly thanh toan',
+        caption: 'Sequence Diagram - Xu ly thanh toan',
+      },
+      {
+        src: '/du_an1/du_an1.5.png',
+        alt: 'Activity Diagram - Tim kiem san pham',
+        caption: 'Activity Diagram - Tim kiem san pham',
+      },
+    ],
     links: { drive: '#', figma: '#' },
   },
   {
@@ -64,7 +95,38 @@ export const projects = [
       'Hoàn thành tài liệu SRS 45 trang cho module quản lý kho, xác định được 12 GAP items và đề xuất giải pháp cho từng item.',
     lessons:
       'Hiểu sâu hơn về cách cấu trúc tài liệu SRS chuyên nghiệp và tầm quan trọng của traceability matrix.',
-    images: [],
+    images: [
+      {
+        src: '/du_an2/du_an2.png',
+        alt: 'Rich Picture - Tong quan quy trinh he thong',
+        caption: 'Rich Picture - Tong quan quy trinh he thong',
+      },
+      {
+        src: '/du_an2/du_an2.1.png',
+        alt: 'So do cau truc to chuc',
+        caption: 'So do cau truc to chuc',
+      },
+      {
+        src: '/du_an2/du_an2.2.png',
+        alt: 'Use Case - Goi y fill hang',
+        caption: 'Use Case - Goi y fill hang',
+      },
+      {
+        src: '/du_an2/du_an2.3.png',
+        alt: 'Use Case - Tao dot cham hang',
+        caption: 'Use Case - Tao dot cham hang',
+      },
+      {
+        src: '/du_an2/du_an2.4.png',
+        alt: 'Sequence Diagram - Dang nhap',
+        caption: 'Sequence Diagram - Dang nhap',
+      },
+      {
+        src: '/du_an2/du_an2.5.png',
+        alt: 'Sequence Diagram - Tao dot cham hang',
+        caption: 'Sequence Diagram - Tao dot cham hang',
+      },
+    ],
     links: {
       drive: '#',
       github: 'https://github.com/hunggthinhh/HTTTQL',
