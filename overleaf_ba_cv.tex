@@ -14,7 +14,10 @@
 \else
   \usepackage{fontspec}
 \fi
-\usepackage{microtype}
+\ifPDFTeX
+\else
+  \usepackage{microtype}
+\fi
 \usepackage{xcolor}
 \usepackage{enumitem}
 \usepackage{hyperref}
@@ -42,6 +45,7 @@
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
+\setlength{\fboxsep}{0pt}
 \setlength{\TPHorizModule}{1cm}
 \setlength{\TPVertModule}{1cm}
 \setlist[itemize]{leftmargin=1em,itemsep=1.8pt,parsep=0pt,topsep=2pt}
