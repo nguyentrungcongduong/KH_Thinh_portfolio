@@ -1,11 +1,19 @@
 %% ============================================
 %% CV - PHAN HUNG THINH - Business Analyst
-%% Compiler: XeLaTeX on Overleaf
+%% Compiler: XeLaTeX preferred; pdfLaTeX fallback supported
 %% ============================================
 \documentclass[a4paper,10pt]{article}
 
 \usepackage[margin=0cm]{geometry}
-\usepackage{fontspec}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{vietnam}
+  \usepackage[T5]{fontenc}
+  \usepackage{tgheros}
+  \renewcommand{\familydefault}{\sfdefault}
+\else
+  \usepackage{fontspec}
+\fi
 \usepackage{microtype}
 \usepackage{xcolor}
 \usepackage{enumitem}
@@ -15,16 +23,21 @@
 \usepackage[absolute,overlay]{textpos}
 \usepackage{ifthen}
 
-\defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
-\IfFontExistsTF{Open Sans}
-  {\setmainfont{Open Sans}}
-  {\setmainfont{TeX Gyre Heros}}
-\IfFontExistsTF{Montserrat}
-  {\newfontfamily\headingfont{Montserrat}}
-  {\newfontfamily\headingfont{TeX Gyre Heros}}
-\IfFontExistsTF{Roboto}
-  {\newfontfamily\detailfont{Roboto}}
-  {\newfontfamily\detailfont{TeX Gyre Heros}}
+\ifPDFTeX
+  \newcommand{\headingfont}{\sffamily}
+  \newcommand{\detailfont}{\sffamily}
+\else
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \IfFontExistsTF{Open Sans}
+    {\setmainfont{Open Sans}}
+    {\setmainfont{TeX Gyre Heros}}
+  \IfFontExistsTF{Montserrat}
+    {\newfontfamily\headingfont{Montserrat}}
+    {\newfontfamily\headingfont{TeX Gyre Heros}}
+  \IfFontExistsTF{Roboto}
+    {\newfontfamily\detailfont{Roboto}}
+    {\newfontfamily\detailfont{TeX Gyre Heros}}
+\fi
 
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
