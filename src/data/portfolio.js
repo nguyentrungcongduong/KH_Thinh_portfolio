@@ -6,7 +6,7 @@
 export const personalInfo = {
   name: 'Phan Hùng Thịnh',
   title: 'Thực tập sinh Business Analyst',
-  phone: '0XXX XXX XXX',
+  phone: '0965050142',
   email: 'thinh.phan@email.com',
   address: 'Quận 12, TP. Hồ Chí Minh',
   quote: '"Turning business complexity into structured clarity - one process at a time."',
