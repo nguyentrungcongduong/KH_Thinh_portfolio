@@ -2,6 +2,7 @@
   <div
     class="swiss-noise"
     :aria-busy="showLoader"
+    :style="scrollMoodStyle"
     @click="handleImageClick"
   >
     <Transition name="loader-fade">
@@ -22,6 +23,11 @@
         </div>
       </div>
     </Transition>
+
+    <div class="scroll-mood" aria-hidden="true">
+      <div class="scroll-mood__bar"></div>
+      <div class="scroll-mood__wash"></div>
+    </div>
 
     <NavBar />
 
@@ -73,7 +79,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
 import { useScrollAnimation } from '@/composables/useScrollAnimation.js'
 import NavBar from '@/components/NavBar.vue'
 import HeroSection from '@/components/HeroSection.vue'
@@ -86,7 +92,15 @@ import FooterSection from '@/components/FooterSection.vue'
 
 const showLoader = ref(true)
 const activeImage = ref(null)
+const scrollProgress = ref(0)
+const heroScroll = ref(0)
 const minLoadingMs = 1200
+let scrollAnimationFrame = null
+
+const scrollMoodStyle = computed(() => ({
+  '--scroll-progress': scrollProgress.value,
+  '--hero-scroll': heroScroll.value,
+}))
 
 function openImage(image) {
   activeImage.value = {
@@ -123,8 +137,30 @@ function handleKeydown(event) {
   }
 }
 
+function updateScrollMood() {
+  scrollAnimationFrame = null
+
+  const scrollTop = window.scrollY
+  const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight)
+  const heroHeight = Math.max(1, window.innerHeight)
+
+  scrollProgress.value = Math.min(1, Math.max(0, scrollTop / maxScroll))
+  heroScroll.value = Math.min(1, Math.max(0, scrollTop / heroHeight))
+}
+
+function requestScrollMoodUpdate() {
+  if (scrollAnimationFrame) {
+    return
+  }
+
+  scrollAnimationFrame = window.requestAnimationFrame(updateScrollMood)
+}
+
 onMounted(() => {
   document.addEventListener('keydown', handleKeydown)
+  window.addEventListener('scroll', requestScrollMoodUpdate, { passive: true })
+  window.addEventListener('resize', requestScrollMoodUpdate)
+  updateScrollMood()
 
   const startedAt = window.performance.now()
 
@@ -146,6 +182,13 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   document.removeEventListener('keydown', handleKeydown)
+  window.removeEventListener('scroll', requestScrollMoodUpdate)
+  window.removeEventListener('resize', requestScrollMoodUpdate)
+
+  if (scrollAnimationFrame) {
+    window.cancelAnimationFrame(scrollAnimationFrame)
+  }
+
   document.body.classList.remove('lightbox-open')
 })
 
