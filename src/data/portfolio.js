@@ -79,7 +79,10 @@ export const projects = [
         caption: 'Activity Diagram - Tim kiem san pham',
       },
     ],
-    links: { drive: '#', figma: '#' },
+    links: {
+      drive: 'https://docs.google.com/document/d/1WNMDAvptXeaWxipY-k5PPOL_7cVS6b8R/edit?usp=sharing&ouid=105379329389586303385&rtpof=true&sd=true',
+      figma: '#',
+    },
   },
   {
     id: 2,
@@ -128,7 +131,7 @@ export const projects = [
       },
     ],
     links: {
-      drive: '#',
+      drive: 'https://docs.google.com/document/d/1EErEOzBvqhhrRptvYHMm_D-_20e2K6s3/edit?usp=sharing&ouid=105379329389586303385&rtpof=true&sd=true',
       github: 'https://github.com/hunggthinhh/HTTTQL',
     },
   },
@@ -178,7 +181,7 @@ export const projects = [
       },
     ],
     links: {
-      drive: '#',
+      drive: 'https://docs.google.com/document/d/1iz-W5ofKHLroMQEQA46hOROq7BZu4A-W/edit?usp=sharing&ouid=105379329389586303385&rtpof=true&sd=true',
       figma: '#',
       demo: '#',
       github: 'https://github.com/hunggthinhh/Web_banhang',
