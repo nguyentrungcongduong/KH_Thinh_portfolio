@@ -97,10 +97,114 @@
   .eyebrow {
     @apply text-xs font-bold text-swiss-accent;
   }
+
+  .loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 14px;
+    min-height: 100vh;
+    overflow: hidden;
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.025) 1px, transparent 1px),
+      #FAFAF7;
+    background-size: 24px 24px, 24px 24px, auto;
+    color: #16201C;
+  }
+
+  .loading-screen::before,
+  .loading-screen::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .loading-screen::before {
+    width: 280px;
+    height: 280px;
+    border-radius: 999px;
+    border: 2px solid rgba(200, 74, 47, 0.85);
+    transform: translate(-190px, -120px);
+  }
+
+  .loading-screen::after {
+    width: 180px;
+    height: 180px;
+    right: max(24px, 12vw);
+    bottom: max(40px, 12vh);
+    background: rgba(22, 32, 28, 0.08);
+    border: 2px solid rgba(22, 32, 28, 0.9);
+  }
+
+  .loading-mark {
+    position: relative;
+    z-index: 1;
+    font-size: clamp(3rem, 10vw, 6.5rem);
+    line-height: 0.95;
+    font-weight: 800;
+  }
+
+  .loading-mark span {
+    color: #C84A2F;
+  }
+
+  .loading-copy {
+    position: relative;
+    z-index: 1;
+    color: rgba(22, 32, 28, 0.68);
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  .loading-track {
+    position: relative;
+    z-index: 1;
+    width: min(280px, 72vw);
+    height: 6px;
+    margin-top: 8px;
+    overflow: hidden;
+    border: 2px solid #16201C;
+    background: #FFFFFF;
+    border-radius: 999px;
+  }
+
+  .loading-bar {
+    width: 45%;
+    height: 100%;
+    background: #C84A2F;
+    animation: loading-slide 1s ease-in-out infinite;
+  }
+
+  .loader-fade-leave-active {
+    transition: opacity 0.45s ease, transform 0.45s ease;
+  }
+
+  .loader-fade-leave-to {
+    opacity: 0;
+    transform: scale(1.01);
+  }
 }
 
 *, *::before, *::after {
   letter-spacing: 0 !important;
+}
+
+@keyframes loading-slide {
+  0% {
+    transform: translateX(-110%);
+  }
+
+  45% {
+    transform: translateX(60%);
+  }
+
+  100% {
+    transform: translateX(240%);
+  }
 }
 
 /* ============================================
@@ -155,6 +259,15 @@
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
+  }
+
+  .loading-bar {
+    animation: none;
+    width: 100%;
+  }
+
+  .loader-fade-leave-active {
+    transition: none;
   }
 }
 
