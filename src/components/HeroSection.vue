@@ -66,9 +66,11 @@
           class="absolute w-[50px] h-[50px] md:w-[80px] md:h-[80px] bg-white bottom-8 right-8 md:bottom-16 md:right-20"
         ></div>
 
+        <HeroBadge3D class="absolute inset-0 z-20" />
+
         <!-- Section number watermark -->
         <div
-          class="absolute bottom-4 left-4 md:bottom-8 md:left-8 z-20 text-white/20 text-[8rem] md:text-[14rem] font-extrabold leading-none select-none"
+          class="absolute bottom-4 left-4 md:bottom-8 md:left-8 z-30 text-white/20 text-[8rem] md:text-[14rem] font-extrabold leading-none select-none pointer-events-none"
         >
           01
         </div>
@@ -154,4 +156,5 @@
 
 <script setup>
 import { personalInfo } from '@/data/portfolio.js'
+import HeroBadge3D from '@/components/HeroBadge3D.vue'
 </script>
