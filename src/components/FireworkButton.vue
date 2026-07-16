@@ -1,15 +1,12 @@
 <template>
   <div class="firework-widget">
-    <Transition name="firework-toast">
-      <div
-        v-if="showToast"
-        class="firework-toast"
-        role="status"
-        aria-live="polite"
-      >
+    <div
+      class="firework-toast"
+      role="status"
+      aria-live="polite"
+    >
         Hãy tặng anh ấy 1 pháo hoa cho sự nỗ lực của anh ấy
-      </div>
-    </Transition>
+    </div>
 
     <button
       ref="button"
@@ -38,12 +35,10 @@ import { onBeforeUnmount, ref } from 'vue'
 
 const canvas = ref(null)
 const button = ref(null)
-const showToast = ref(false)
 const particles = []
 const colors = ['#C84A2F', '#16201C', '#FFD166', '#EF476F', '#118AB2', '#06D6A0', '#FAFAF7']
 
 let animationFrame = null
-let toastTimeout = null
 let resizeCleanup = null
 
 function resizeCanvas() {
@@ -140,12 +135,6 @@ function startAnimation() {
 
 function launchFireworks(event) {
   resizeCanvas()
-  showToast.value = true
-
-  window.clearTimeout(toastTimeout)
-  toastTimeout = window.setTimeout(() => {
-    showToast.value = false
-  }, 3200)
 
   const trigger = event?.currentTarget || button.value
   const rect = trigger?.getBoundingClientRect()
@@ -173,8 +162,6 @@ if (typeof window !== 'undefined') {
 }
 
 onBeforeUnmount(() => {
-  window.clearTimeout(toastTimeout)
-
   if (animationFrame) {
     window.cancelAnimationFrame(animationFrame)
   }
