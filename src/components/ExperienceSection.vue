@@ -20,6 +20,14 @@ function briefDescription(text) {
   const firstSentence = text.split(/[.?!]/)[0]
   return firstSentence + '.'
 }
+
+function isValidLink(link) {
+  return typeof link === 'string' && link.trim() !== '' && link !== '#'
+}
+
+function hasProjectLinks(project) {
+  return project.links && Object.values(project.links).some(isValidLink)
+}
 </script>
 
 <template>
@@ -187,15 +195,13 @@ function briefDescription(text) {
                   </div>
 
                   <!-- Links -->
-                  <div
-                    v-if="project.links && Object.keys(project.links).length"
-                  >
+                  <div v-if="hasProjectLinks(project)">
                     <h4 class="eyebrow mb-3">
                       Liên kết
                     </h4>
                     <div class="flex flex-wrap gap-3">
                       <a
-                        v-if="project.links.drive"
+                        v-if="isValidLink(project.links.drive)"
                         :href="project.links.drive"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -207,7 +213,7 @@ function briefDescription(text) {
                         Drive
                       </a>
                       <a
-                        v-if="project.links.figma"
+                        v-if="isValidLink(project.links.figma)"
                         :href="project.links.figma"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -219,7 +225,19 @@ function briefDescription(text) {
                         Figma
                       </a>
                       <a
-                        v-if="project.links.demo"
+                        v-if="isValidLink(project.links.github)"
+                        :href="project.links.github"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 border-2 border-swiss-fg px-4 py-2 text-sm font-semibold bg-white text-swiss-fg rounded-md hover:bg-swiss-fg hover:text-white transition-colors duration-200 ease-out"
+                      >
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 2a10 10 0 00-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.19-3.37-1.19-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.35 1.08 2.92.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.6 9.6 0 0112 6.99c.85 0 1.71.11 2.51.34 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86v2.75c0 .27.18.58.69.48A10 10 0 0012 2z"/>
+                        </svg>
+                        GitHub
+                      </a>
+                      <a
+                        v-if="isValidLink(project.links.demo)"
                         :href="project.links.demo"
                         target="_blank"
                         rel="noopener noreferrer"

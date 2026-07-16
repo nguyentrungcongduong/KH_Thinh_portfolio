@@ -65,7 +65,10 @@ export const projects = [
     lessons:
       'Hiểu sâu hơn về cách cấu trúc tài liệu SRS chuyên nghiệp và tầm quan trọng của traceability matrix.',
     images: [],
-    links: { drive: '#' },
+    links: {
+      drive: '#',
+      github: 'https://github.com/hunggthinhh/HTTTQL',
+    },
   },
   {
     id: 3,
@@ -91,7 +94,12 @@ export const projects = [
     lessons:
       'Kinh nghiệm làm việc trực tiếp với team dev, hiểu rõ hơn về Agile workflow và cách viết user stories hiệu quả.',
     images: [],
-    links: { drive: '#', figma: '#', demo: '#' },
+    links: {
+      drive: '#',
+      figma: '#',
+      demo: '#',
+      github: 'https://github.com/hunggthinhh/Web_banhang',
+    },
   },
 ]
 
